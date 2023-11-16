@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Commande extends Table{
+public class Commande {
 	
 	protected String nomClient;
 	protected boolean pret;
