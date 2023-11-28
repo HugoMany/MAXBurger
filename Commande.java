@@ -4,8 +4,8 @@ public class Commande {
 	
 	protected String nomClient;
 	protected boolean pret;
-	protected ArrayList<Plat> listeDesPlatCommander =new ArrayList<Plat>();
-	protected ArrayList<Boisson> listeDesBoissonCommander =new ArrayList<Boisson>();
+	protected ArrayList<Plat> listeDesPlatCommander = new ArrayList<Plat>();
+	protected ArrayList<Boisson> listeDesBoissonCommander = new ArrayList<Boisson>();
 
 	
 	//Creation d'une commande
@@ -23,9 +23,7 @@ public class Commande {
 	}
 		
 
-	public String getNomClient() {
-		return nomClient;
-	}
+	public String getNomClient() { return nomClient; }
 
 	public boolean isPret() {
 		return pret;
