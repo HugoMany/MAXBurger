@@ -9,7 +9,6 @@ public class Table {
 	
 	//Conduire nos clients à une table
 	public void conduireATable(int nbClient) {
-		
 	}
 	
 }
