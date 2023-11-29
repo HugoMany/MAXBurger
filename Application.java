@@ -69,9 +69,16 @@ public class Application {
             int choixEcran = scanner.nextInt();
             switch (choixEcran) {
                 case 1:
+                    Carte menuPlat = new Carte();
+                    menuPlat.printCartePlat();
+                    break;
+                case 2:
+                    Carte menuBoisson = new Carte();
+                    menuBoisson.printCarteBoisson();
+                    break;
+                case 3:
                     
                     break;
-            
                 default:
                     startApp();
                     break;
@@ -101,7 +108,27 @@ public class Application {
     }
 
     public void ecranBar(){
-        
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+        //System.out.println("Quel écran souhaitez vous afficher?");
+        System.out.println("0- Retour");
+        System.out.println("1- Afficher les commandes à faire");
+        System.out.println("2- Commmande pret à servir");
+        try (Scanner scanner = new Scanner(System.in)) {
+            int choixEcran = scanner.nextInt();
+            switch (choixEcran) {
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                
+                default:
+                    startApp();
+                    break;
+            }
+        }
     }
 
     public void ecranMonitoring(){

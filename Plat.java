@@ -11,4 +11,9 @@ public class Plat {
     public int getId() { return this.id ; }
     public String getNom() { return this.nom ; }
     
+    // overriding the toString() method
+    @Override
+    public String toString() {
+        return this.id + " " + this.nom + " ";
+    }
 }

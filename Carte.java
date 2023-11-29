@@ -1,9 +1,40 @@
 public class Carte {
     
-    protected Plat cartePlat;
-    protected Boisson carteBoisson;
+    protected Plat[] cartePlat = 
+    {
+        new Plat(0, "Steak"),
+        new Plat(0, "Steak"),
+        new Plat(0, "Steak"),
+        new Plat(0, "Steak"),
+        new Plat(0, "Steak"),
+        new Plat(0, "Steak"),
+        new Plat(0, "Steak"),
+        new Plat(0, "Steak"),
 
-    public Plat getCartePlat() { return this.cartePlat; }
-    public Boisson getCarteBoisson() { return this.carteBoisson; }
+    } ;
+    protected Boisson[] carteBoisson = 
+    {
+        new Boisson(0, "Porto"),
+        new Boisson(0, "Porto"),
+        new Boisson(0, "Porto"),
+        new Boisson(0, "Porto"),
+        new Boisson(0, "Porto"),
+        new Boisson(0, "Porto"),
+        new Boisson(0, "Porto"),
+        new Boisson(0, "Porto"),
+
+    } ;
+
+    public void printCartePlat() {
+         for(int idx=0; idx< (this.cartePlat.length);idx++){
+            System.out.println(this.cartePlat[idx]);
+         }
+        }
+    public void printCarteBoisson() { 
+        for(int idx=0; idx< (this.carteBoisson.length);idx++){
+            System.out.println(this.carteBoisson[idx]);
+         }
+    }
+
 
 }
