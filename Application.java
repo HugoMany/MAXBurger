@@ -9,5 +9,9 @@ public class Application {
     public ArrayList<Journee> getListeDesJournée() {
         return listeDesJournée;
     }
+
+    public void startApp(){
+        
+    }
     
 }
