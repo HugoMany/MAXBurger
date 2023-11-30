@@ -3,10 +3,15 @@ import java.util.Scanner;
 
 public class Application {
     protected ArrayList<Journee> listeDesJournée =new ArrayList<Journee>();
+    public static final int NOMBRE_TABLE = 15;
+    public int currentDay = 0;
     public Carte carteDuRestorant = new Carte();
     //Ajout d'une journée dans l'application
     public void addAJournee(Journee newJournee){
         this.listeDesJournée.add(newJournee);
+        for (int i = 1; i <= NOMBRE_TABLE; i++) {
+            newJournee.listeDesTables.add(new Table(i));
+        }
     }
 
     //Retourne la listes des journées
@@ -15,6 +20,9 @@ public class Application {
     }
     //Demarrage de l'application dans le Menu Principal
     public void startApp(){
+        //Ajout de la premiere Journée.
+        addAJournee(new Journee());
+        
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("------------------------------------------------------");
         System.out.println("-----------------Max Burger Application---------------");
@@ -70,13 +78,53 @@ public class Application {
                 case 1:
                     carteDuRestorant.printCartePlat();
                     printReturnEcranCommande();
-                    
+                    priseCommandePlat();
                     break;
                 case 2:
                     carteDuRestorant.printCarteBoisson();
                     printReturnEcranCommande();
+                    priseCommandeBoisson();
 
 
+
+                    break;
+                default:
+                    startApp();
+                    break;
+            }
+        }
+    }
+
+    private void priseCommandeBoisson() {
+
+    }
+
+    private void priseCommandePlat(String nomClient) {
+        Commande newCommandePrise = new Commande(nomClient,1);
+        try (Scanner scanner = new Scanner(System.in)) {
+            int choixEcran = scanner.nextInt();
+            switch (choixEcran) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                case 9:
+                    break;
+                case 10:
+                    break;
+                case 11:
                     break;
                 default:
                     startApp();
@@ -121,7 +169,6 @@ public class Application {
                 case 2:
                     
                     break;
-                
                 default:
                     startApp();
                     break;
