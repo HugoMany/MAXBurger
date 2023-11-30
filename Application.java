@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Application {
     protected ArrayList<Journee> listeDesJournée =new ArrayList<Journee>();
-
+    public Carte carteDuRestorant = new Carte();
     //Ajout d'une journée dans l'application
     public void addAJournee(Journee newJournee){
         this.listeDesJournée.add(newJournee);
@@ -64,20 +64,19 @@ public class Application {
         System.out.println("0- Retour");
         System.out.println("1- Menu des Plats");
         System.out.println("2- Menu des Boissons");
-        System.out.println("3- Prendre une Commande");
         try (Scanner scanner = new Scanner(System.in)) {
             int choixEcran = scanner.nextInt();
             switch (choixEcran) {
                 case 1:
-                    Carte menuPlat = new Carte();
-                    menuPlat.printCartePlat();
+                    carteDuRestorant.printCartePlat();
+                    printReturnEcranCommande();
+                    
                     break;
                 case 2:
-                    Carte menuBoisson = new Carte();
-                    menuBoisson.printCarteBoisson();
-                    break;
-                case 3:
-                    
+                    carteDuRestorant.printCarteBoisson();
+                    printReturnEcranCommande();
+
+
                     break;
                 default:
                     startApp();
@@ -109,7 +108,6 @@ public class Application {
 
     public void ecranBar(){
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
         //System.out.println("Quel écran souhaitez vous afficher?");
         System.out.println("0- Retour");
         System.out.println("1- Afficher les commandes à faire");
@@ -133,5 +131,15 @@ public class Application {
 
     public void ecranMonitoring(){
         
+    }
+
+    private void printReturnEcranCommande(){
+        System.out.println("0- Retour");
+        try (Scanner scanner = new Scanner(System.in)) {
+        int choixEcran2 = scanner.nextInt();
+        if (choixEcran2==0) {
+        ecranCommande();
+        }
+        }
     }
 }

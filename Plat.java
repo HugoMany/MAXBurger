@@ -14,6 +14,6 @@ public class Plat {
     // overriding the toString() method
     @Override
     public String toString() {
-        return this.id + " " + this.nom + " ";
+        return this.id + "- \t" + this.nom + " ";
     }
 }
