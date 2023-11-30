@@ -5,20 +5,20 @@ public class Table {
 	public static final int NOMBRE_TABLE = 15;
 
 	protected int numeroTable;
-	protected int nombreDeCommandeTable = 0;
+	protected int nombreDeCommandesTable = 0;
 	protected boolean tableOccupee = false;
-	protected ArrayList<Commande> tableauDeCommande;
+	protected ArrayList<Commande> tableauDeCommandes;
 	protected int nbClient = 0;
 
 	public int getNumeroTable() { return this.numeroTable; }
-	public int getNombreDeCommandeTable() { return this.nombreDeCommandeTable; }
+	public int getNombreDeCommandesTable() { return this.nombreDeCommandesTable; }
 	public boolean isTableOccupee() { return this.tableOccupee; }
-	public ArrayList<Commande> getTableauDeCommande() { return this.tableauDeCommande; }
-	public Commande getCommande(int numeroDeCommande) { return this.tableauDeCommande.get(numeroDeCommande); }
+	public ArrayList<Commande> getTableauDeCommande() { return this.tableauDeCommandes; }
+	public Commande getCommande(int numeroDeCommande) { return this.tableauDeCommandes.get(numeroDeCommande); }
 	public int getNbClient() { return this.nbClient; }
 
-	public void incrNombreDeCommandeTable() { this.nombreDeCommandeTable++; }
-	public void decrNombreDeCommandetable() { this.nombreDeCommandeTable--; }
+	public void incrNombreDeCommandesTable() { this.nombreDeCommandesTable++; }
+	public void decrNombreDeCommandesTable() { this.nombreDeCommandesTable--; }
 
 	public Table(int numeroTable) {
 		this.numeroTable = numeroTable;
@@ -33,32 +33,35 @@ public class Table {
 	// 	}
 	// }
 
-	public void ajouterCommande(String nomClient, ArrayList<Plat> listePlat, ArrayList<Boisson> listeBoisson) {
-		incrNombreDeCommandeTable();
-		Commande commande = new Commande(nomClient, getNombreDeCommandeTable());
+	public void ajouterCommande(String nomClient, ArrayList<Plat> listePlats, ArrayList<Boisson> listeBoissons) {
+		incrNombreDeCommandesTable();
+		Commande commande = new Commande(nomClient, getNombreDeCommandesTable());
 		// On ajoute tout les plats à la liste des plats de la commande
-		for (int platN = 0; platN < listePlat.size(); platN++) {
-			commande.ajoutPlatALaCommande(listePlat.get(platN));
+		for (int platN = 0; platN < listePlats.size(); platN++) {
+			commande.ajoutPlatALaCommande(listePlats.get(platN));
 		}
 		// On ajoute toutes les boissons à la liste des boissons de la commande
-		for (int boissonN = 0; boissonN < listeBoisson.size(); boissonN++) {
-			commande.ajoutBoissonALaCommande(listeBoisson.get(boissonN));
+		for (int boissonN = 0; boissonN < listeBoissons.size(); boissonN++) {
+			commande.ajoutBoissonALaCommande(listeBoissons.get(boissonN));
 		}
-		this.tableauDeCommande.add(commande);
+		this.tableauDeCommandes.add(commande);
 	}
 
-	public void ajouterPlatsALaCommande(ArrayList<Plat> listePlat, int numeroDeCommande) {
-		for (int platN = 0; platN < listePlat.size(); platN++) {
-			//setCommande(getCommande(numeroDeCommande).ajoutPlatALaCommande(listePlat.get(platN)));
+	public void ajouterPlatsALaCommande(ArrayList<Plat> listePlats, int numeroDeCommande) {
+		for (int platN = 0; platN < listePlats.size(); platN++) {
+			tableauDeCommandes.get(numeroDeCommande).ajoutPlatALaCommande(listePlats.get(platN));
 		}
 	}
 
-	public void ajouterBoissonALaCommande() {
-
+	public void ajouterBoissonALaCommande(ArrayList<Boisson> listeBoissons, int numeroDeCommande) {
+		for (int boissonN = 0; boissonN < listeBoissons.size(); boissonN++) {
+			tableauDeCommandes.get(numeroDeCommande).ajoutBoissonALaCommande(listeBoissons.get(boissonN));
+		}
 	}
 
 	public void annulerCommande(int numeroDeCommande) {
-
+		this.tableauDeCommandes.remove(numeroDeCommande);
+		decrNombreDeCommandesTable();
 	}
 
 }
