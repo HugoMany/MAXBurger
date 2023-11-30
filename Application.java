@@ -2,10 +2,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Application {
-    protected ArrayList<Journee> listeDesJournée =new ArrayList<Journee>();
+    //
+    //      Constantes
+    //
     public static final int NOMBRE_TABLE = 15;
+
+    //
+    //      Variables
+    //
+    protected ArrayList<Journee> listeDesJournée =new ArrayList<Journee>();
     public int currentDay = 0;
     public Carte carteDuRestorant = new Carte();
+
+
     //Ajout d'une journée dans l'application
     public void addAJournee(Journee newJournee){
         this.listeDesJournée.add(newJournee);
@@ -103,38 +112,14 @@ public class Application {
         //A continuer
         String nomClient="MANY";
 
-        
+
         Commande newCommandePrise = new Commande(nomClient,1);
-        try (Scanner scanner = new Scanner(System.in)) {
-            int choixEcran = scanner.nextInt();
-            switch (choixEcran) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    break;
-                case 10:
-                    break;
-                case 11:
-                    break;
-                default:
-                    startApp();
-                    break;
-            }
+        try (Scanner scannerPriseCommandePlat = new Scanner(System.in)) {
+            int choixEcran = scannerPriseCommandePlat.nextInt();
+            Plat platCommande= carteDuRestorant.cartePlat[choixEcran];
+            newCommandePrise.ajoutPlatALaCommande(platCommande);
         }
+
     }
 
     public void ecranCuisine(){
