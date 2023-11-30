@@ -10,7 +10,7 @@ public class Application {
     public void addAJournee(Journee newJournee){
         this.listeDesJournée.add(newJournee);
         for (int i = 1; i <= NOMBRE_TABLE; i++) {
-            newJournee.listeDesTables.add(new Table(i));
+            newJournee.listeDesTables.add(new Table(i,getRandomNumber(1,5)*2));
         }
     }
 
@@ -99,7 +99,11 @@ public class Application {
 
     }
 
-    private void priseCommandePlat(String nomClient) {
+    private void priseCommandePlat() {
+        //A continuer
+        String nomClient="MANY";
+
+        
         Commande newCommandePrise = new Commande(nomClient,1);
         try (Scanner scanner = new Scanner(System.in)) {
             int choixEcran = scanner.nextInt();
@@ -188,5 +192,8 @@ public class Application {
         ecranCommande();
         }
         }
+    }
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 }
