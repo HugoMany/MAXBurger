@@ -1,22 +1,31 @@
+import java.util.ArrayList;
+
 public class Addition {
     
     protected int numTable;
-    protected int nbUtilisation;
     protected double somme;
-
+    protected ArrayList<Plat> listeDesPlats;
+    protected ArrayList<Boisson> listeDesBoissons;
 
 
     public void initAddition(int numTable, int nbUtilisation) {
         this.numTable = numTable;
-        this.nbUtilisation = nbUtilisation;
         this.somme = 0;
     }
 
-    public Addition(int numTable, int nbUtilisation, double montant) {
+    public Addition(int numTable, double montant) {
         this.numTable = numTable;
-        this.nbUtilisation = nbUtilisation;
         this.somme = montant;
     }
+
+
+    public void newAddition(int numCommande) {
+        //Commande test = getCommande(numCommande);
+        
+    }
+
+
+
 
 
 }

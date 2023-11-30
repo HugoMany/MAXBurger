@@ -10,7 +10,7 @@ public class Commande {
 	protected double addition = 0;
 	
 	//Creation d'une commande
-	protected Commande(String nomClient, int numeroDeCommande) {
+	public Commande(String nomClient, int numeroDeCommande) {
 		this.nomClient = nomClient;
 		this.numeroDeCommande = numeroDeCommande;
 	}

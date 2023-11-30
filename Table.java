@@ -2,36 +2,26 @@ import java.util.ArrayList;
 
 public class Table {
 
-	public static final int NOMBRE_TABLE = 15;
-
 	protected int numeroTable;
 	protected int nombreDeCommandesTable = 0;
 	protected boolean tableOccupee = false;
 	protected ArrayList<Commande> tableauDeCommandes;
-	protected int nbClient = 0;
+	protected int nbClientMax;
 
 	public int getNumeroTable() { return this.numeroTable; }
 	public int getNombreDeCommandesTable() { return this.nombreDeCommandesTable; }
 	public boolean isTableOccupee() { return this.tableOccupee; }
 	public ArrayList<Commande> getTableauDeCommande() { return this.tableauDeCommandes; }
 	public Commande getCommande(int numeroDeCommande) { return this.tableauDeCommandes.get(numeroDeCommande); }
-	public int getNbClient() { return this.nbClient; }
+	public int getNbClientMax() { return this.nbClientMax; }
 
 	public void incrNombreDeCommandesTable() { this.nombreDeCommandesTable++; }
 	public void decrNombreDeCommandesTable() { this.nombreDeCommandesTable--; }
 
-	public Table(int numeroTable) {
+	public Table(int numeroTable, int nbClientMax) {
 		this.numeroTable = numeroTable;
+		this.nbClientMax = nbClientMax;
 	}
-
-	//// Conduire nos clients à une table
-	// public void conduireATable(int nbClient) {
-	// 	for (int numTable = 0; numTable < NOMBRE_TABLE; numTable++) {
-	// 		if (getTablesOccupees()[numTable] == false) {
-	// 			this.tablesOccupees[numTable] = true;
-	// 		}
-	// 	}
-	// }
 
 	public void ajouterCommande(String nomClient, ArrayList<Plat> listePlats, ArrayList<Boisson> listeBoissons) {
 		incrNombreDeCommandesTable();
