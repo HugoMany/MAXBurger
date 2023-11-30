@@ -9,6 +9,8 @@ public class Facture {
 	public Facture() {
 		this.montantTotal = 0;
 	}
+
+	
 	
 	// protected int listeAdditions[];
 	// // protected ArrayList<Integer> Additions = new ArrayList<Integer>();

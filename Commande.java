@@ -5,8 +5,8 @@ public class Commande {
 	protected String nomClient;
 	protected int numeroDeCommande;
 	protected boolean pret = false;
-	protected ArrayList<Plat> listeDesPlatCommander = new ArrayList<Plat>();
-	protected ArrayList<Boisson> listeDesBoissonCommander = new ArrayList<Boisson>();
+	protected ArrayList<Plat> listeDesPlatsCommandes = new ArrayList<Plat>();
+	protected ArrayList<Boisson> listeDesBoissonsCommandees = new ArrayList<Boisson>();
 	protected double addition = 0;
 	
 	//Creation d'une commande
@@ -14,13 +14,13 @@ public class Commande {
 		this.nomClient = nomClient;
 		this.numeroDeCommande = numeroDeCommande;
 	}
-	// Ajout d'une commande de plat
+	// Ajout d'un plat à la commande
 	public void ajoutPlatALaCommande(Plat newPlat) {
-		listeDesPlatCommander.add(newPlat);
+		listeDesPlatsCommandes.add(newPlat);
 	}
-	// Ajout d'une boisson de plat
+	// Ajout d'une boisson à la commande
 	public void ajoutBoissonALaCommande(Boisson newBoisson) {
-		listeDesBoissonCommander.add(newBoisson);
+		listeDesBoissonsCommandees.add(newBoisson);
 	}
 		
 
@@ -30,4 +30,13 @@ public class Commande {
 	public boolean isPret() {
 		return pret;
 	}
+
+	public ArrayList<Plat> getPlat() {
+		return listeDesPlatsCommandes;
+	}
+
+	public ArrayList<Boisson> getBoisson() {
+		return listeDesBoissonsCommandees;
+	}
+
 }
