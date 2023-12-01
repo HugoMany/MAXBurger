@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 
 public class Addition {
@@ -24,7 +26,7 @@ public class Addition {
     }
 
     public Addition() {
-
+    
     }
 
     public Addition(int numTable, double montant) {
@@ -32,20 +34,54 @@ public class Addition {
         this.somme = montant;
     }
 
-
-    public void newAddition(Commande maCommande) {
-
-        
-        //this.listeDesPLats.addAll(maCommande.getPlat());
-        this.listeDesPlats = new ArrayList<Plat> (maCommande.getPlat());
-        this.listeDesBoissons = new ArrayList<Boisson> (maCommande.getBoisson());
-        
-        
-
+    void calculAddition() {
+        if (listeDesPlats == null) {}
+        else {
+            for (int i = 0; i < listeDesPlats.size(); i++) {
+                somme += listeDesPlats.get(i).getPrix();
+            }
+        }
+        if (listeDesBoissons == null) {}
+        else {
+            for (int i = 0; i < listeDesBoissons.size(); i++) {
+                somme += listeDesBoissons.get(i).getPrix();
+            }
+        }
     }
 
+
+    public void newAddition(Commande maCommande) {
+        this.listeDesPlats = new ArrayList<Plat> (maCommande.getPlat());
+        this.listeDesBoissons = new ArrayList<Boisson> (maCommande.getBoisson());
+        calculAddition();
+    }
+
+    public String listeDesPlatsTicket() {
+        String liste = "";
+        if (this.listeDesPlats == null) { return "Aucun plat\n";}
+        else {
+            for (int i = 0; i < listeDesPlats.size(); i++) {
+                liste += listeDesPlats.get(i).getNom() + "- \t" + listeDesPlats.get(i).getPrix() + " €\n";
+            }
+            return liste;
+        }
+    }
+
+    public String listeDesBoissonsTicket() {
+        String liste = "";
+        if (this.listeDesPlats == null) { return "Aucune boisson\n";}
+        else {
+            for (int i = 0; i < listeDesBoissons.size(); i++) {
+                liste += listeDesBoissons.get(i).getNom() + "- \t" + listeDesBoissons.get(i).getPrix() + " €\n";
+            }
+            return liste;
+        }
+    }
+
+    
+
     public void enregistrementFichier() {
-        String cheminDuFichier = "monFichier.txt";
+        String cheminDuFichier = "Ticket Table n" + numTable;
         // Créez gn qbdet File pour le fichSgc
         File fichier = new File(cheminDuFichier);
         try {
@@ -70,8 +106,26 @@ public class Addition {
     public void editionFichier() {
         // try-with-resources
         Charset charset = Charset.forName ("windows-1252");
-        String nomFichier = "monFichier.txt";
-        String texte = "hellkf\naa";
+        String nomFichier = "Ticket Table n" + numTable;
+        String texte = "# Ticket Table n" + numTable + "\n\n\n";
+
+
+
+        texte += listeDesPlatsTicket();
+        texte += listeDesBoissonsTicket();
+
+        
+
+        texte += "\n\nA payer : " + somme;
+
+        if (somme >= 2) {
+            texte += " euros";
+        }
+        else {
+            texte += " euro";
+        }
+
+
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), charset)) {
 
             writer.write(texte);
