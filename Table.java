@@ -17,7 +17,7 @@ public class Table {
 
 	public void incrNombreDeCommandesTable() { this.nombreDeCommandesTable++; }
 	public void decrNombreDeCommandesTable() { this.nombreDeCommandesTable--; }
-	public void setTableOccupee(bool isOccupee) { this.tableOccupee = isOccupee; }
+	public void setTableOccupee(boolean isOccupee) { this.tableOccupee = isOccupee; }
 
 	public Table(int numeroTable, int nbClientMax) {
 		this.numeroTable = numeroTable;
