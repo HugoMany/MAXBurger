@@ -24,7 +24,12 @@ public class Carte {
         new Boisson(4, "Jus de fruit",5),
         new Boisson(5, "Verre d'eau",0)
     } ;
-
+    public Boisson[] getCarteBoisson() {
+        return carteBoisson;
+    }
+    public Plat[] getCartePlat() {
+        return cartePlat;
+    }
     public void printCartePlat() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
          for(int idx=0; idx< (this.cartePlat.length);idx++){

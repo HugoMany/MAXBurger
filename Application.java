@@ -109,39 +109,27 @@ public class Application {
     private void priseCommandePlat() {
         //A continuer
         String nomClient="MANY";
-        System.out.println("\n");
+        int numTable = 1;
 
-        //Nouvelle commande a prendre
-        Commande newCommandePrise = new Commande(nomClient,1);
-
-        //scanner pour recuper l'int
+        ArrayList<Integer> listePlatCommande = new ArrayList<Integer>();
+        boolean commandeEnd= false;
         try (Scanner scanner = new Scanner(System.in)) {
-            if (scanner.hasNextInt()) {
-                int userInput = scanner.nextInt();
-                //Listes de plat préajouter avec Validation
-                ArrayList<Plat> newCommandesPriseListe = new ArrayList<Plat>();
-                
-                //Valide et enregistre la commande
-                if (userInput==0) {
-                    for (int index = 0; index < newCommandesPriseListe.size(); index++) {
-                        newCommandePrise.ajoutPlatALaCommande(newCommandesPriseListe.get(index));
-                    }
-                    System.out.println("Commande Validé.");
-                    ecranCommande();
-
+            while (!commandeEnd) {
+                //if (scanner.hasNextInt()) {
+                int choixEcran = scanner.nextInt();
+                if (choixEcran != 0) {
+                    listePlatCommande.add(choixEcran);
+                } else {
+                    System.out.println(listePlatCommande);
+                    commandeEnd = true;
                 }
-                else{
-                    Plat platCommande= carteDuRestorant.cartePlat[userInput];
-                    newCommandesPriseListe.add(platCommande);
-                    System.out.println("Le plat : '"+platCommande.nom+"' a été ajouté a la commande.");
-                    priseCommandePlat();
-                }
-                
-            } else {
-                priseCommandePlat();
+                //} else {
+                //    System.err.println("Erreur");
+                //}
             }
         }
-
+        
+        
     
 
     }
