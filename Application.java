@@ -86,12 +86,10 @@ public class Application {
             switch (choixEcran) {
                 case 1:
                     carteDuRestorant.printCartePlat();
-                    printReturnEcranCommande();
                     priseCommandePlat();
                     break;
                 case 2:
                     carteDuRestorant.printCarteBoisson();
-                    printReturnEcranCommande();
                     priseCommandeBoisson();
 
 
@@ -111,14 +109,40 @@ public class Application {
     private void priseCommandePlat() {
         //A continuer
         String nomClient="MANY";
+        System.out.println("\n");
 
-
+        //Nouvelle commande a prendre
         Commande newCommandePrise = new Commande(nomClient,1);
-        try (Scanner scannerPriseCommandePlat = new Scanner(System.in)) {
-            int choixEcran = scannerPriseCommandePlat.nextInt();
-            Plat platCommande= carteDuRestorant.cartePlat[choixEcran];
-            newCommandePrise.ajoutPlatALaCommande(platCommande);
+
+        //scanner pour recuper l'int
+        try (Scanner scanner = new Scanner(System.in)) {
+            if (scanner.hasNextInt()) {
+                int userInput = scanner.nextInt();
+                //Listes de plat préajouter avec Validation
+                ArrayList<Plat> newCommandesPriseListe = new ArrayList<Plat>();
+                
+                //Valide et enregistre la commande
+                if (userInput==0) {
+                    for (int index = 0; index < newCommandesPriseListe.size(); index++) {
+                        newCommandePrise.ajoutPlatALaCommande(newCommandesPriseListe.get(index));
+                    }
+                    System.out.println("Commande Validé.");
+                    ecranCommande();
+
+                }
+                else{
+                    Plat platCommande= carteDuRestorant.cartePlat[userInput];
+                    newCommandesPriseListe.add(platCommande);
+                    System.out.println("Le plat : '"+platCommande.nom+"' a été ajouté a la commande.");
+                    priseCommandePlat();
+                }
+                
+            } else {
+                priseCommandePlat();
+            }
         }
+
+    
 
     }
 
@@ -169,15 +193,7 @@ public class Application {
         
     }
 
-    private void printReturnEcranCommande(){
-        System.out.println("0- Retour");
-        try (Scanner scanner = new Scanner(System.in)) {
-        int choixEcran2 = scanner.nextInt();
-        if (choixEcran2==0) {
-        ecranCommande();
-        }
-        }
-    }
+    
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);
     }
