@@ -109,23 +109,29 @@ public class Application {
     private void priseCommandePlat() {
         //A continuer
         String nomClient="MANY";
+        //int numTable = demandeNumeroTable();
         int numTable = 1;
-
+        Commande newCommande = new Commande(nomClient, numTable);
         ArrayList<Integer> listePlatCommande = new ArrayList<Integer>();
         boolean commandeEnd= false;
         try (Scanner scanner = new Scanner(System.in)) {
             while (!commandeEnd) {
-                //if (scanner.hasNextInt()) {
                 int choixEcran = scanner.nextInt();
                 if (choixEcran != 0) {
                     listePlatCommande.add(choixEcran);
-                } else {
-                    System.out.println(listePlatCommande);
+                    System.out.println(carteDuRestorant.cartePlat[choixEcran].nom);
+                } 
+                else {
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                    System.out.println("La commande a été valider elle contient :");
+                    for (int i = 0; i < listePlatCommande.size(); i++) {
+                        System.out.println(carteDuRestorant.cartePlat[i].nom);
+                        newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[i]);
+                    }
+                    //System.out.println(newCommande);
                     commandeEnd = true;
                 }
-                //} else {
-                //    System.err.println("Erreur");
-                //}
+                
             }
         }
         
@@ -133,7 +139,19 @@ public class Application {
     
 
     }
+    private int demandeNumeroTable(){
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("Quelle Numéro de table");
+        int userValue = 0;
 
+        try (Scanner scanner = new Scanner(System.in)) {
+            userValue = scanner.nextInt();
+
+        }
+        
+        return userValue;
+        
+    }
     public void ecranCuisine(){
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
