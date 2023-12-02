@@ -1,21 +1,12 @@
+import java.util.ArrayList;
+
 public class Serveur extends Personnel {
-
-    public static final int NOMBRE_TABLE = 15;
     
-    protected int gereLaTableNumero;
+    protected ArrayList<Table> tablesGeres;
 
-    Serveur(String nom, String prenom, int numeroTable) {
+    Serveur(String nom, String prenom, ArrayList<Table> listTables) {
         super(nom, prenom);
-        this.gereLaTableNumero = numeroTable;
-    }
-
-    // Conduire des clients à une table
-    public void conduireATable(int nbClient) {
-    	for (int numTable = 0; numTable < NOMBRE_TABLE; numTable++) {
-    		//if (getTablesOccupees()[numTable] == false) {
-    		//	this.tablesOccupees[numTable] = true;
-    		//}
-    	}
+        this.tablesGeres = listTables;
     }
     
 }

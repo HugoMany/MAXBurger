@@ -4,6 +4,13 @@ public class main {
 	public static void main(String[] args) {
 		Application Resto = new Application();
 		Resto.startApp();
+
+
+		//Addition hello = new Addition();
+		//hello.enregistrementFichier();
+		//hello.editionFichier();
+
+
 	}
 
 }
