@@ -5,7 +5,7 @@ public class Table {
 	protected int numeroTable;
 	protected int nombreDeCommandesTable = 0;
 	protected boolean tableOccupee = false;
-	protected ArrayList<Commande> tableauDeCommandes;
+	protected ArrayList<Commande> tableauDeCommandes=new ArrayList<Commande>();
 	protected int nbClientMax;
 
 	public int getNumeroTable() { return this.numeroTable; }

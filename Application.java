@@ -27,7 +27,9 @@ public class Application {
 
     public void startApp() {
         addAJournee(new Journee());
-
+        mainMenu();
+    }
+    public void mainMenu(){
         displayMainMenu();
 
         try (Scanner scanner = new Scanner(System.in)) {
@@ -56,51 +58,83 @@ public class Application {
 
     public void ecranCommande(Scanner scanner) {
         displayCommandeMenu();
-
-        int choixEcran = scanner.nextInt();
-        switch (choixEcran) {
-            case 1:
-                carteDuRestorant.printCartePlat();
-                demandeNomEtNumeroTable(0, scanner);
-                break;
-            case 2:
-                carteDuRestorant.printCarteBoisson();
-                demandeNomEtNumeroTable(1, scanner);
-                break;
-            default:
-                startApp();
-                break;
+        if (scanner.hasNextInt()) {
+            int choixEcran = scanner.nextInt();
+            switch (choixEcran) {
+                case 1:
+                    carteDuRestorant.printCartePlat();
+                    demandeNomEtNumeroTable(0, scanner);
+                    break;
+                case 2:
+                    carteDuRestorant.printCarteBoisson();
+                    demandeNomEtNumeroTable(1, scanner);
+                    break;
+                default:
+                    startApp();
+                    break;
         }
+        }
+       
     }
 
     public void priseCommandePlat(String nomClient, int numTable, Scanner scanner) {
+        //A finir
+        nomClient ="many";
+
         Commande newCommande = new Commande(nomClient, numTable);
         ArrayList<Integer> listePlatCommande = new ArrayList<>();
         boolean commandeEnd = false;
 
         while (!commandeEnd) {
+            System.out.println("Saisissez le n° du plat choisi.(0 : pour valider la commande, -1 : annuler)");
             int choixEcran = scanner.nextInt();
+            if (choixEcran==-1) {
+                commandeEnd=true;
+                return;
+            }
             if (choixEcran != 0) {
                 listePlatCommande.add(choixEcran);
                 System.out.println(carteDuRestorant.cartePlat[choixEcran].nom);
-            } else {
+            } 
+            else {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int platCode : listePlatCommande) {
                     System.out.println(carteDuRestorant.cartePlat[platCode].nom);
                     newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[platCode]);
+                    commandeEnd=true;
                 }
                 commandeEnd = true;
             }
         }
+        // Récupérer la journée actuelle
+        Journee journeeActuelle = listeDesJournée.get(currentDay);
+
+        // Récupérer la liste des tables de la journée actuelle
+        ArrayList<Table> listeDesTables = journeeActuelle.listeDesTables;
+
+        // Récupérer la table spécifique à mettre à jour
+        Table tableAModifier = listeDesTables.get(numTable);
+
+        // Ajouter une nouvelle commande à la table
+        tableAModifier.tableauDeCommandes.add(newCommande);
+
+        // Mettre à jour la table dans la liste des tables
+        listeDesTables.set(numTable, tableAModifier);
+
+        // Mettre à jour la journée dans la liste générale
+        listeDesJournée.set(currentDay, journeeActuelle);
+
+        mainMenu();
+
     }
 
     public void demandeNomEtNumeroTable(int type, Scanner scanner) {
         String nom = "";
         int numeroTable = 0;
 
-        System.out.println("Entrez le nom du client : ");
-        nom = scanner.nextLine();
+        //System.out.println("Entrez le nom du client : ");
+        //nom = scanner.nextLine();
 
         System.out.println("Entrez le numéro de table : ");
         while (!scanner.hasNextInt()) {
@@ -126,7 +160,13 @@ public class Application {
             int choixEcran = scanner.nextInt();
             switch (choixEcran) {
                 case 1:
-                    // Ajoutez le code pour afficher les commandes à faire en cuisine
+                    ArrayList<Table> allTables=this.listeDesJournée.get(currentDay).listeDesTables;
+                    for (int i = 0; i < allTables.size() ; i++) {
+                        for (int y = 0; y < allTables.get(i).nombreDeCommandesTable ; y++) {
+                            System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
+                            //(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
+                        }
+                    }
                     break;
                 default:
                     startApp();
