@@ -41,7 +41,7 @@ public class Application {
                     ecranCommande(scanner);
                     break;
                 case 2:
-                    ecranCuisine();
+                    ecranCuisine(scanner);
                     break;
                 case 3:
                     ecranBar();
@@ -153,26 +153,26 @@ public class Application {
         }
     }
 
-    public void ecranCuisine() {
+    public void ecranCuisine( Scanner scanner) {
         displayCuisineMenu();
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            int choixEcran = scanner.nextInt();
-            switch (choixEcran) {
-                case 1:
-                    ArrayList<Table> allTables=this.listeDesJournée.get(currentDay).listeDesTables;
-                    for (int i = 0; i < allTables.size() ; i++) {
-                        for (int y = 0; y < allTables.get(i).nombreDeCommandesTable ; y++) {
-                            System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
-                            //(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
-                        }
+      
+        int choixEcran = scanner.nextInt();
+        switch (choixEcran) {
+            case 1:
+                ArrayList<Table> allTables=this.listeDesJournée.get(currentDay).listeDesTables;
+                for (int i = 0; i < allTables.size() ; i++) {
+                    for (int y = 0; y < allTables.get(i).tableauDeCommandes.size() ; y++) {
+                        System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
+                        //(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
                     }
-                    break;
-                default:
-                    startApp();
-                    break;
-            }
+                }
+                break;
+            default:
+                startApp();
+                break;
         }
+    
     }
 
     public void ecranBar() {
