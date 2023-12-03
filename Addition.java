@@ -16,8 +16,8 @@ public class Addition {
     
     protected int numTable;
     protected double somme;
-    protected ArrayList<Plat> listeDesPlats;// = new ArrayList<>();
-    protected ArrayList<Boisson> listeDesBoissons;// = new ArrayList<Boisson>();
+    protected ArrayList<Plat> listeDesPlats;
+    protected ArrayList<Boisson> listeDesBoissons;
 
 
     public void initAddition(int numTable, int nbUtilisation) {

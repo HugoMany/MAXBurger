@@ -11,6 +11,11 @@ public class Facture {
 	}
 
 
+	// public void hello() {
+	// 	getListeDesJournée();
+	// }
+
+
 	
 	// protected int listeAdditions[];
 	// // protected ArrayList<Integer> Additions = new ArrayList<Integer>();
