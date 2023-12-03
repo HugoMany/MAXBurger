@@ -27,33 +27,35 @@ public class Application {
 
     public void startApp() {
         addAJournee(new Journee());
-        mainMenu();
+        try (Scanner scanner = new Scanner(System.in)) {
+        mainMenu(scanner);
+        }
     }
-    public void mainMenu(){
+    public void mainMenu(Scanner scanner){
         displayMainMenu();
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            int choixEcran = scanner.nextInt();
-            switch (choixEcran) {
-                case 0:
-                    break;
-                case 1:
-                    ecranCommande(scanner);
-                    break;
-                case 2:
-                    ecranCuisine(scanner);
-                    break;
-                case 3:
-                    ecranBar();
-                    break;
-                case 4:
-                    ecranMonitoring();
-                    break;
-                default:
-                    startApp();
-                    break;
+       
+        int choixEcran = scanner.nextInt();
+        switch (choixEcran) {
+            case 0:
+                break;
+            case 1:
+                ecranCommande(scanner);
+                break;
+            case 2:
+                ecranCuisine(scanner);
+                break;
+            case 3:
+                ecranBar(scanner);
+                break;
+            case 4:
+                ecranMonitoring(scanner);
+                break;
+            default:
+                startApp();
+                break;
             }
-        }
+        
     }
 
     public void ecranCommande(Scanner scanner) {
@@ -77,7 +79,31 @@ public class Application {
        
     }
 
-    public void priseCommandePlat(String nomClient, int numTable, Scanner scanner) {
+   
+    public void demandeNomEtNumeroTable(int type, Scanner scanner) {
+        String nom = "";
+        int numeroTable = 0;
+
+        //System.out.println("Entrez le nom du client : ");
+        //nom = scanner.nextLine();
+
+        System.out.println("Entrez le numéro de table : ");
+        while (!scanner.hasNextInt()) {
+            System.err.println("Erreur : Veuillez entrer un numéro de table valide.");
+            scanner.next(); // Consommer la saisie incorrecte
+        }
+        numeroTable = scanner.nextInt();
+
+        // Consommer la fin de la ligne pour éviter les problèmes de décalage
+        scanner.nextLine();
+
+        if (type == 0) {
+            priseCommandePlat(nom, numeroTable, scanner);
+        } else if(type == 1){
+            priseCommandeBoisson(nom, numeroTable, scanner);
+        }
+    }
+     public void priseCommandePlat(String nomClient, int numTable, Scanner scanner) {
         //A finir
         nomClient ="many";
 
@@ -94,14 +120,14 @@ public class Application {
             }
             if (choixEcran != 0) {
                 listePlatCommande.add(choixEcran);
-                System.out.println(carteDuRestorant.cartePlat[choixEcran].nom);
+                System.out.println(carteDuRestorant.cartePlat[choixEcran-1].nom);
             } 
             else {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int platCode : listePlatCommande) {
-                    System.out.println(carteDuRestorant.cartePlat[platCode].nom);
-                    newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[platCode]);
+                    System.out.println(carteDuRestorant.cartePlat[platCode-1].nom);
+                    newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[platCode-1]);
                     commandeEnd=true;
                 }
                 commandeEnd = true;
@@ -125,33 +151,60 @@ public class Application {
         // Mettre à jour la journée dans la liste générale
         listeDesJournée.set(currentDay, journeeActuelle);
 
-        mainMenu();
+        mainMenu(scanner);
 
     }
 
-    public void demandeNomEtNumeroTable(int type, Scanner scanner) {
-        String nom = "";
-        int numeroTable = 0;
+     public void priseCommandeBoisson(String nomClient, int numTable, Scanner scanner) {
+         //A finir
+        nomClient ="many";
 
-        //System.out.println("Entrez le nom du client : ");
-        //nom = scanner.nextLine();
+        Commande newCommande = new Commande(nomClient, numTable);
+        ArrayList<Integer> listeBoissonCommande = new ArrayList<>();
+        boolean commandeEnd = false;
 
-        System.out.println("Entrez le numéro de table : ");
-        while (!scanner.hasNextInt()) {
-            System.err.println("Erreur : Veuillez entrer un numéro de table valide.");
-            scanner.next(); // Consommer la saisie incorrecte
+        while (!commandeEnd) {
+            System.out.println("Saisissez le n° de la boisson choisi.(0 : pour valider la commande, -1 : annuler)");
+            int choixEcran = scanner.nextInt();
+            if (choixEcran==-1) {
+                commandeEnd=true;
+                return;
+            }
+            if (choixEcran != 0) {
+                listeBoissonCommande.add(choixEcran);
+                System.out.println(carteDuRestorant.carteBoisson[choixEcran-1].nom);
+            } 
+            else {
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                System.out.println("La commande a été validée, elle contient :");
+                for (int boissonCode : listeBoissonCommande) {
+                    System.out.println(carteDuRestorant.carteBoisson[boissonCode-1].nom);
+                    newCommande.ajoutBoissonALaCommande(carteDuRestorant.carteBoisson[boissonCode-1]);
+                    commandeEnd=true;
+                }
+                commandeEnd = true;
+            }
         }
-        numeroTable = scanner.nextInt();
+        // Récupérer la journée actuelle
+        Journee journeeActuelle = listeDesJournée.get(currentDay);
 
-        // Consommer la fin de la ligne pour éviter les problèmes de décalage
-        scanner.nextLine();
+        // Récupérer la liste des tables de la journée actuelle
+        ArrayList<Table> listeDesTables = journeeActuelle.listeDesTables;
 
-        if (type == 0) {
-            priseCommandePlat(nom, numeroTable, scanner);
-        } else {
-            // Ajoutez le code pour la prise de commande des boissons
-        }
-    }
+        // Récupérer la table spécifique à mettre à jour
+        Table tableAModifier = listeDesTables.get(numTable);
+
+        // Ajouter une nouvelle commande à la table
+        tableAModifier.tableauDeCommandes.add(newCommande);
+
+        // Mettre à jour la table dans la liste des tables
+        listeDesTables.set(numTable, tableAModifier);
+
+        // Mettre à jour la journée dans la liste générale
+        listeDesJournée.set(currentDay, journeeActuelle);
+
+        mainMenu(scanner);
+     }
 
     public void ecranCuisine( Scanner scanner) {
         displayCuisineMenu();
@@ -167,6 +220,7 @@ public class Application {
                         //(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
                     }
                 }
+                mainMenu(scanner);
                 break;
             default:
                 startApp();
@@ -175,23 +229,30 @@ public class Application {
     
     }
 
-    public void ecranBar() {
+    public void ecranBar(Scanner scanner) {
         displayBarMenu();
 
-        try (Scanner scanner = new Scanner(System.in)) {
             int choixEcran = scanner.nextInt();
             switch (choixEcran) {
                 case 1:
-                    // Ajoutez le code pour afficher les commandes à faire au bar
+                    ArrayList<Table> allTables=this.listeDesJournée.get(currentDay).listeDesTables;
+                    for (int i = 0; i < allTables.size() ; i++) {
+                        for (int y = 0; y < allTables.get(i).tableauDeCommandes.size() ; y++) {
+                            System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesBoissonsCommandees);
+                            //(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
+                        }
+                    }
+                    scanner.nextInt();
+                    mainMenu(scanner);
                     break;
                 default:
                     startApp();
                     break;
             }
-        }
+        
     }
 
-    public void ecranMonitoring() {
+    public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
     }
 
