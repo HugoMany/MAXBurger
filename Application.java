@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 public class Application {
     //
-    //  Constantes
+    // Constantes
     //
     public static final int NOMBRE_TABLE = 15;
 
     //
-    //  Variables
+    // Variables
     //
     protected ArrayList<Journee> listeDesJournée = new ArrayList<>();
     public int currentDay = 0;
@@ -17,9 +17,17 @@ public class Application {
     //
     // Getters/Setters
     //
-    public ArrayList<Journee> getListeDesJournée() { return this.listeDesJournée; }
-    public int getCurrentDay() { return this.currentDay; }
-    public Carte getCarteDuRestorant() { return this.carteDuRestorant; }
+    public ArrayList<Journee> getListeDesJournée() {
+        return this.listeDesJournée;
+    }
+
+    public int getCurrentDay() {
+        return this.currentDay;
+    }
+
+    public Carte getCarteDuRestorant() {
+        return this.carteDuRestorant;
+    }
 
     public void addAJournee(Journee newJournee) {
         this.listeDesJournée.add(newJournee);
@@ -28,22 +36,19 @@ public class Application {
         }
     }
 
-
     //
     // Méthodes
     //
     public void startApp() {
         addAJournee(new Journee());
         try (Scanner scanner = new Scanner(System.in)) {
-        mainMenu(scanner);
+            mainMenu(scanner);
         }
     }
 
-
-    public void mainMenu(Scanner scanner){
+    public void mainMenu(Scanner scanner) {
         displayMainMenu();
 
-       
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 0:
@@ -63,10 +68,9 @@ public class Application {
             default:
                 startApp();
                 break;
-            }
-        
-    }
+        }
 
+    }
 
     public void ecranCommande(Scanner scanner) {
         displayCommandeMenu();
@@ -88,43 +92,68 @@ public class Application {
         }
     }
 
-   
     public void demandeNomEtNumeroTable(int type, Scanner scanner) {
         String nom = "";
         int numeroTable = 0;
 
-        //System.out.println("Entrez le nom du client : ");
-        //nom = scanner.nextLine();
+        // System.out.println("Entrez le nom du client : ");
+        // nom = scanner.nextLine();
 
         // NOMBRE DE CLIENTS
-        System.out.println("Entrez le nombre de clients : ");
+        System.out.println("1-Nouveau client : ");
+        System.out.println("2-Client ayant deja une table: ");
         while (!scanner.hasNextInt()) {
             System.err.println("Erreur : Veuillez entrer un nombre valide.");
             scanner.next(); // Consommer la saisie incorrecte
         }
-        if (scanner.nextInt() > 8) {
-            System.err.println("Erreur : Il y'a trop de clients.");
-            return;
-        }
-        int nbClients = scanner.nextInt();
-        // Consommer la fin de la ligne pour éviter les problèmes de décalage
-        scanner.nextLine();
+        int choixNewOrOld = scanner.nextInt();
 
-        // ASSIGNATION D'UNE TABLE
-        Journee journee = getListeDesJournée().get(getCurrentDay());
-        numeroTable = journee.conduireATable(nbClients);
-        
+        //Choix Si NOUVEAU CLIENTS
+        if (choixNewOrOld == 1) {
+            System.out.println("Entrez le nombre de clients : ");
+            while (!scanner.hasNextInt()) {
+                System.err.println("Erreur : Veuillez entrer un nombre valide.");
+                scanner.next(); // Consommer la saisie incorrecte
+            }
+
+            int nbClients = scanner.nextInt();
+            if (nbClients > 8) {
+                System.err.println("Erreur;");
+                mainMenu(scanner);
+                ;
+            }
+            // Consommer la fin de la ligne pour éviter les problèmes de décalage
+            scanner.nextLine();
+
+            // ASSIGNATION D'UNE TABLE
+            Journee journee = getListeDesJournée().get(getCurrentDay());
+            numeroTable = journee.conduireATable(nbClients);
+
+            
+        } 
+         //Choix Si LES CLIENTS ONT DEJA UNE TABLE
+        else {
+            System.out.println("Entrez le numéro de table : ");
+            while (!scanner.hasNextInt()) {
+                System.err.println("Erreur : Veuillez entrer un numéro de table valide.");
+                scanner.next(); // Consommer la saisie incorrecte
+            }
+            numeroTable = scanner.nextInt();
+    
+            // Consommer la fin de la ligne pour éviter les problèmes de décalage
+            scanner.nextLine();
+    
+        }   
         if (type == 0) {
-            priseCommandePlat(nom, numeroTable, scanner);
-        } else if(type == 1){
-            priseCommandeBoisson(nom, numeroTable, scanner);
+                        priseCommandePlat(nom, numeroTable, scanner);
+                    } else if (type == 1) {
+                        priseCommandeBoisson(nom, numeroTable, scanner);
         }
     }
 
-
     public void priseCommandePlat(String nomClient, int numTable, Scanner scanner) {
-        //A finir
-        nomClient ="many";
+        // A finir
+        nomClient = "many";
 
         Commande newCommande = new Commande(nomClient, numTable);
         ArrayList<Integer> listePlatCommande = new ArrayList<>();
@@ -133,21 +162,20 @@ public class Application {
         while (!commandeEnd) {
             System.out.println("Saisissez le n° du plat choisi.(0 : pour valider la commande, -1 : annuler)");
             int choixEcran = scanner.nextInt();
-            if (choixEcran==-1) {
-                commandeEnd=true;
+            if (choixEcran == -1) {
+                commandeEnd = true;
                 return;
             }
             if (choixEcran != 0) {
                 listePlatCommande.add(choixEcran);
-                System.out.println(carteDuRestorant.cartePlat[choixEcran-1].nom);
-            } 
-            else {
+                System.out.println(carteDuRestorant.cartePlat[choixEcran - 1].nom);
+            } else {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int platCode : listePlatCommande) {
-                    System.out.println(carteDuRestorant.cartePlat[platCode-1].nom);
-                    newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[platCode-1]);
-                    commandeEnd=true;
+                    System.out.println(carteDuRestorant.cartePlat[platCode - 1].nom);
+                    newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[platCode - 1]);
+                    commandeEnd = true;
                 }
                 commandeEnd = true;
             }
@@ -169,15 +197,15 @@ public class Application {
 
         // Mettre à jour la journée dans la liste générale
         listeDesJournée.set(currentDay, journeeActuelle);
-
+        System.out.println("0- Pour continuer");
+        scanner.nextInt();
         mainMenu(scanner);
 
     }
 
-
     public void priseCommandeBoisson(String nomClient, int numTable, Scanner scanner) {
-         //A finir
-        nomClient ="many";
+        // A finir
+        nomClient = "many";
 
         Commande newCommande = new Commande(nomClient, numTable);
         ArrayList<Integer> listeBoissonCommande = new ArrayList<>();
@@ -186,21 +214,20 @@ public class Application {
         while (!commandeEnd) {
             System.out.println("Saisissez le n° de la boisson choisi.(0 : pour valider la commande, -1 : annuler)");
             int choixEcran = scanner.nextInt();
-            if (choixEcran==-1) {
-                commandeEnd=true;
+            if (choixEcran == -1) {
+                commandeEnd = true;
                 return;
             }
             if (choixEcran != 0) {
                 listeBoissonCommande.add(choixEcran);
-                System.out.println(carteDuRestorant.carteBoisson[choixEcran-1].nom);
-            } 
-            else {
+                System.out.println(carteDuRestorant.carteBoisson[choixEcran - 1].nom);
+            } else {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int boissonCode : listeBoissonCommande) {
-                    System.out.println(carteDuRestorant.carteBoisson[boissonCode-1].nom);
-                    newCommande.ajoutBoissonALaCommande(carteDuRestorant.carteBoisson[boissonCode-1]);
-                    commandeEnd=true;
+                    System.out.println(carteDuRestorant.carteBoisson[boissonCode - 1].nom);
+                    newCommande.ajoutBoissonALaCommande(carteDuRestorant.carteBoisson[boissonCode - 1]);
+                    commandeEnd = true;
                 }
                 commandeEnd = true;
             }
@@ -224,21 +251,19 @@ public class Application {
         listeDesJournée.set(currentDay, journeeActuelle);
 
         mainMenu(scanner);
-     }
+    }
 
-    
-    public void ecranCuisine( Scanner scanner) {
+    public void ecranCuisine(Scanner scanner) {
         displayCuisineMenu();
 
-      
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 1:
-                ArrayList<Table> allTables=this.listeDesJournée.get(currentDay).listeDesTables;
-                for (int i = 0; i < allTables.size() ; i++) {
-                    for (int y = 0; y < allTables.get(i).tableauDeCommandes.size() ; y++) {
+                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
+                for (int i = 0; i < allTables.size(); i++) {
+                    for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
                         System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
-                        //(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
+                        // (allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
                     }
                 }
                 mainMenu(scanner);
@@ -247,43 +272,39 @@ public class Application {
                 startApp();
                 break;
         }
-    
-    }
 
+    }
 
     public void ecranBar(Scanner scanner) {
         displayBarMenu();
 
-            int choixEcran = scanner.nextInt();
-            switch (choixEcran) {
-                case 1:
-                    ArrayList<Table> allTables=this.listeDesJournée.get(currentDay).listeDesTables;
-                    for (int i = 0; i < allTables.size() ; i++) {
-                        for (int y = 0; y < allTables.get(i).tableauDeCommandes.size() ; y++) {
-                            System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesBoissonsCommandees);
-                            //(allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
-                        }
+        int choixEcran = scanner.nextInt();
+        switch (choixEcran) {
+            case 1:
+                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
+                for (int i = 0; i < allTables.size(); i++) {
+                    for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
+                        System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesBoissonsCommandees);
+                        // (allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
                     }
-                    scanner.nextInt();
-                    mainMenu(scanner);
-                    break;
-                default:
-                    startApp();
-                    break;
-            }
-        
-    }
+                }
+                scanner.nextInt();
+                mainMenu(scanner);
+                break;
+            default:
+                startApp();
+                break;
+        }
 
+    }
 
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
     }
 
-
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
     }
-
 
     // Méthodes pour afficher les différents menus
     private void displayMainMenu() {
@@ -302,7 +323,6 @@ public class Application {
         System.out.println("0- Exit");
     }
 
-
     private void displayCommandeMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
@@ -310,20 +330,17 @@ public class Application {
         System.out.println("2- Menu des Boissons");
     }
 
-
     private void displayCuisineMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
         System.out.println("1- Afficher les commandes à faire en cuisine");
     }
 
-
     private void displayBarMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
         System.out.println("1- Afficher les commandes à faire au bar");
     }
-
 
     public static void main(String[] args) {
         Application application = new Application();
