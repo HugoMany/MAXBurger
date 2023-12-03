@@ -300,6 +300,11 @@ public class Application {
 
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
+        Facture hello = new Facture();
+		hello.lectureFichier();
+		hello.affichageMenuStatsTickets();
+
+        // Ajouter demande si enregistrement dans un fichier
     }
 
     public int getRandomNumber(int min, int max) {
