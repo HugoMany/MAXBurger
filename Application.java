@@ -8,11 +8,18 @@ public class Application {
     public static final int NOMBRE_TABLE = 15;
 
     //
-    //  Variabmes
+    //  Variables
     //
     protected ArrayList<Journee> listeDesJournée = new ArrayList<>();
     public int currentDay = 0;
     public Carte carteDuRestorant = new Carte();
+
+    //
+    // Getters/Setters
+    //
+    public ArrayList<Journee> getListeDesJournée() { return this.listeDesJournée; }
+    public int getCurrentDay() { return this.currentDay; }
+    public Carte getCarteDuRestorant() { return this.carteDuRestorant; }
 
     public void addAJournee(Journee newJournee) {
         this.listeDesJournée.add(newJournee);
@@ -21,16 +28,18 @@ public class Application {
         }
     }
 
-    public ArrayList<Journee> getListeDesJournée() {
-        return listeDesJournée;
-    }
 
+    //
+    // Méthodes
+    //
     public void startApp() {
         addAJournee(new Journee());
         try (Scanner scanner = new Scanner(System.in)) {
         mainMenu(scanner);
         }
     }
+
+
     public void mainMenu(Scanner scanner){
         displayMainMenu();
 
@@ -58,6 +67,7 @@ public class Application {
         
     }
 
+
     public void ecranCommande(Scanner scanner) {
         displayCommandeMenu();
         if (scanner.hasNextInt()) {
@@ -74,9 +84,8 @@ public class Application {
                 default:
                     startApp();
                     break;
+            }
         }
-        }
-       
     }
 
    
@@ -87,23 +96,33 @@ public class Application {
         //System.out.println("Entrez le nom du client : ");
         //nom = scanner.nextLine();
 
-        System.out.println("Entrez le numéro de table : ");
+        // NOMBRE DE CLIENTS
+        System.out.println("Entrez le nombre de clients : ");
         while (!scanner.hasNextInt()) {
-            System.err.println("Erreur : Veuillez entrer un numéro de table valide.");
+            System.err.println("Erreur : Veuillez entrer un nombre valide.");
             scanner.next(); // Consommer la saisie incorrecte
         }
-        numeroTable = scanner.nextInt();
-
+        if (scanner.nextInt() > 8) {
+            System.err.println("Erreur : Il y'a trop de clients.");
+            return;
+        }
+        int nbClients = scanner.nextInt();
         // Consommer la fin de la ligne pour éviter les problèmes de décalage
         scanner.nextLine();
 
+        // ASSIGNATION D'UNE TABLE
+        Journee journee = getListeDesJournée().get(getCurrentDay());
+        numeroTable = journee.conduireATable(nbClients);
+        
         if (type == 0) {
             priseCommandePlat(nom, numeroTable, scanner);
         } else if(type == 1){
             priseCommandeBoisson(nom, numeroTable, scanner);
         }
     }
-     public void priseCommandePlat(String nomClient, int numTable, Scanner scanner) {
+
+
+    public void priseCommandePlat(String nomClient, int numTable, Scanner scanner) {
         //A finir
         nomClient ="many";
 
@@ -155,7 +174,8 @@ public class Application {
 
     }
 
-     public void priseCommandeBoisson(String nomClient, int numTable, Scanner scanner) {
+
+    public void priseCommandeBoisson(String nomClient, int numTable, Scanner scanner) {
          //A finir
         nomClient ="many";
 
@@ -206,6 +226,7 @@ public class Application {
         mainMenu(scanner);
      }
 
+    
     public void ecranCuisine( Scanner scanner) {
         displayCuisineMenu();
 
@@ -228,6 +249,7 @@ public class Application {
         }
     
     }
+
 
     public void ecranBar(Scanner scanner) {
         displayBarMenu();
@@ -252,13 +274,16 @@ public class Application {
         
     }
 
+
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
     }
 
+
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
     }
+
 
     // Méthodes pour afficher les différents menus
     private void displayMainMenu() {
@@ -277,6 +302,7 @@ public class Application {
         System.out.println("0- Exit");
     }
 
+
     private void displayCommandeMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
@@ -284,17 +310,20 @@ public class Application {
         System.out.println("2- Menu des Boissons");
     }
 
+
     private void displayCuisineMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
         System.out.println("1- Afficher les commandes à faire en cuisine");
     }
 
+
     private void displayBarMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
         System.out.println("1- Afficher les commandes à faire au bar");
     }
+
 
     public static void main(String[] args) {
         Application application = new Application();
