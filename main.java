@@ -10,6 +10,11 @@ public class main {
 		//hello.enregistrementFichier();
 		//hello.editionFichier();
 
+		// Facture hello = new Facture();
+		// hello.lectureFichier();
+		// hello.affichageMenuStatsTickets();
+		// hello.editionFactureJournaliere();
+
 
 	}
 

@@ -16,8 +16,8 @@ public class Addition {
     
     protected int numTable;
     protected double somme;
-    protected ArrayList<Plat> listeDesPlats;// = new ArrayList<>();
-    protected ArrayList<Boisson> listeDesBoissons;// = new ArrayList<Boisson>();
+    protected ArrayList<Plat> listeDesPlats;
+    protected ArrayList<Boisson> listeDesBoissons;
 
 
     public void initAddition(int numTable, int nbUtilisation) {
@@ -103,19 +103,18 @@ public class Addition {
         System.out.println(estAccessible);
     }
 
-    public void editionFichier() {
+    public void editionTicketResume() {
+        
+    }
+
+    public void editionTicket() {
         // try-with-resources
         Charset charset = Charset.forName ("windows-1252");
         String nomFichier = "Ticket Table n" + numTable;
         String texte = "# Ticket Table n" + numTable + "\n\n\n";
 
-
-
         texte += listeDesPlatsTicket();
         texte += listeDesBoissonsTicket();
-
-        
-
         texte += "\n\nA payer : " + somme;
 
         if (somme >= 2) {
@@ -136,6 +135,8 @@ public class Addition {
         }
 
     }
+
+    
 
 
 
