@@ -372,7 +372,7 @@ public class Application {
                 }
                 String prenom = scanner.next();
                 // Consommer la fin de la ligne pour éviter les problèmes de décalage
-                scanner.nextLine():
+                scanner.nextLine();
 
                 break;
             
