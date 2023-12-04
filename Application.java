@@ -225,7 +225,7 @@ public class Application {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int boissonCode : listeBoissonCommande) {
-                    System.out.println(carteDuRestorant.carteBoisson[boissonCode - 1].nom);
+                    System.out.println(carteDuRestorant.carteBoisson[boissonCode - 1].nom+"\n");
                     newCommande.ajoutBoissonALaCommande(carteDuRestorant.carteBoisson[boissonCode - 1]);
                     commandeEnd = true;
                 }
@@ -266,6 +266,8 @@ public class Application {
                         // (allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
                     }
                 }
+                System.out.println("0- Pour continuer");
+                scanner.nextInt();
                 mainMenu(scanner);
                 break;
             default:
@@ -288,6 +290,7 @@ public class Application {
                         // (allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
                     }
                 }
+                System.out.println("0- Pour continuer");
                 scanner.nextInt();
                 mainMenu(scanner);
                 break;
