@@ -30,6 +30,9 @@ public class Commande {
 	public boolean isPret() {
 		return pret;
 	}
+	public void setPret(boolean bool) {
+		this.pret=bool;
+	}
 
 	public ArrayList<Plat> getPlat() {
 		return listeDesPlatsCommandes;
