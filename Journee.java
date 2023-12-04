@@ -3,12 +3,10 @@ import java.util.ArrayList;
 public class Journee {
 
     protected ArrayList<Table> listeDesTables = new ArrayList<Table>();
-    protected ArrayList<Personnel> listesDesEmployees = new ArrayList<Personnel>();
     public int hOuverture;
     public int hFermeture;
 
     public ArrayList<Table> getListeDesTables() { return this.listeDesTables; }
-    public ArrayList<Personnel> getListesDesEmployees() { return this.listesDesEmployees; }
 
     public int conduireATable(int nbClient) {
         boolean tableIdeale = false; // On utilise ce boolean pour trouver la table la plus adapaté au nombre de clients
