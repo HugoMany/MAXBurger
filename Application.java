@@ -13,21 +13,15 @@ public class Application {
     protected ArrayList<Journee> listeDesJournée = new ArrayList<>();
     public int currentDay = 0;
     public Carte carteDuRestorant = new Carte();
+    protected ArrayList<Personnel> listeDesEmployees = new ArrayList<Personnel>();
 
     //
     // Getters/Setters
     //
-    public ArrayList<Journee> getListeDesJournée() {
-        return this.listeDesJournée;
-    }
-
-    public int getCurrentDay() {
-        return this.currentDay;
-    }
-
-    public Carte getCarteDuRestorant() {
-        return this.carteDuRestorant;
-    }
+    public ArrayList<Journee> getListeDesJournée() { return this.listeDesJournée; }
+    public int getCurrentDay() { return this.currentDay; }
+    public Carte getCarteDuRestorant() { return this.carteDuRestorant; }
+    public ArrayList<Personnel> getListeDesEmployees() { return this.listeDesEmployees; }
 
     public void addAJournee(Journee newJournee) {
         this.listeDesJournée.add(newJournee);
@@ -227,7 +221,7 @@ public class Application {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int boissonCode : listeBoissonCommande) {
-                    System.out.println(carteDuRestorant.carteBoisson[boissonCode - 1].nom+"\n");
+                    System.out.println(carteDuRestorant.carteBoisson[boissonCode - 1].nom);
                     newCommande.ajoutBoissonALaCommande(carteDuRestorant.carteBoisson[boissonCode - 1]);
                     commandeEnd = true;
                 }
@@ -372,7 +366,11 @@ public class Application {
                 }
                 String prenom = scanner.next();
                 // Consommer la fin de la ligne pour éviter les problèmes de décalage
-                scanner.nextLine():
+                scanner.nextLine();
+
+                Serveur newServeur = new Serveur(nom, prenom);
+                getListeDesJournée().get(getCurrentDay());
+
 
                 break;
             
