@@ -66,7 +66,4 @@ public class Journee {
     protected void ajoutTable(){
 
     }
-    protected void ajoutEmploye(){
-
-    }
 }

@@ -13,27 +13,26 @@ public class Application {
     protected ArrayList<Journee> listeDesJournée = new ArrayList<>();
     public int currentDay = 0;
     public Carte carteDuRestorant = new Carte();
+    protected ArrayList<Personnel> listeDesEmployees = new ArrayList<Personnel>();
+    protected Boolean tableDuJourDejaDistribué = false;
 
     //
     // Getters/Setters
     //
-    public ArrayList<Journee> getListeDesJournée() {
-        return this.listeDesJournée;
-    }
-
-    public int getCurrentDay() {
-        return this.currentDay;
-    }
-
-    public Carte getCarteDuRestorant() {
-        return this.carteDuRestorant;
-    }
+    public ArrayList<Journee> getListeDesJournée() { return this.listeDesJournée; }
+    public int getCurrentDay() { return this.currentDay; }
+    public Carte getCarteDuRestorant() { return this.carteDuRestorant; }
+    public ArrayList<Personnel> getListeDesEmployees() { return this.listeDesEmployees; }
+    public Boolean isTableDuJourDejaDistribuee() { return this.tableDuJourDejaDistribué; }
 
     public void addAJournee(Journee newJournee) {
         this.listeDesJournée.add(newJournee);
         for (int i = 1; i <= NOMBRE_TABLE; i++) {
             newJournee.listeDesTables.add(new Table(i, getRandomNumber(1, 5) * 2));
         }
+    }
+    public void ajouterEmploye(Personnel personnel) {
+        this.listeDesEmployees.add(personnel);
     }
 
     //
@@ -227,7 +226,7 @@ public class Application {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int boissonCode : listeBoissonCommande) {
-                    System.out.println(carteDuRestorant.carteBoisson[boissonCode - 1].nom+"\n");
+                    System.out.println(carteDuRestorant.carteBoisson[boissonCode - 1].nom);
                     newCommande.ajoutBoissonALaCommande(carteDuRestorant.carteBoisson[boissonCode - 1]);
                     commandeEnd = true;
                 }
@@ -356,7 +355,7 @@ public class Application {
 
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
-            case 1:
+            case 1: // Ajouter serveur
                 System.out.println("Entrez votre nom");
                 while (!scanner.hasNext()) {
                     System.err.println("Erreur : Veuillez entrer votre nom");
@@ -374,10 +373,41 @@ public class Application {
                 // Consommer la fin de la ligne pour éviter les problèmes de décalage
                 scanner.nextLine();
 
+                Serveur newServeur = new Serveur(nom, prenom);
+                ajouterEmploye(newServeur);
+
                 break;
             
-            case 2:
-                
+            case 2: // Distribution des tables
+                if (isTableDuJourDejaDistribuee() == false) {
+                    ArrayList<Serveur> listeDesServeurs = new ArrayList<>();
+                    for (Personnel iPersonnel : getListeDesEmployees()) { // Pour tout le personnel
+                        if (iPersonnel instanceof Serveur) { // On verifie si le personnel est un serveur
+                            listeDesServeurs.add((Serveur) iPersonnel); // on cast le personnel en serveur et on l'ajoute dans la liste des serveurs
+                        }
+                    }
+
+                    int nbServeurs = listeDesServeurs.size();
+                    int nbTablesParServeur = NOMBRE_TABLE / nbServeurs;
+                    int resteDivisionEuclidienne = NOMBRE_TABLE % nbServeurs; // On va compter les tables "en trop" comme un decompteur
+                    int nbTableDejaDistribuee = 0; // On va compter le nombre de table que l'on distribue comme un compteur
+
+                    for (Serveur iServeur : listeDesServeurs) { // Pour tout les serveur
+                        ArrayList<Table> tableDuServeur = new ArrayList<>(); // On cree sa liste de table
+                        for(int iTable = nbTableDejaDistribuee; iTable < nbTablesParServeur; iTable++) {
+                            Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
+                            tableDuServeur.add(journee.getListeDesTables().get(iTable)); // On ajoute cette table a la liste
+                            nbTableDejaDistribuee++;
+                        }
+                        if (resteDivisionEuclidienne > 0) {
+                            Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
+                            tableDuServeur.add(journee.getListeDesTables().get(nbTableDejaDistribuee)); // On ajoute cette table a la liste
+                            nbTableDejaDistribuee++;
+                            resteDivisionEuclidienne--;
+                        }
+                        iServeur.addTables(tableDuServeur);
+                    }
+                }
                 break;
 
             default:
