@@ -65,6 +65,8 @@ public class Application {
             case 4:
                 ecranMonitoring(scanner);
                 break;
+            case 5:
+                ecranGestionPersonnel(scanner);
             default:
                 startApp();
                 break;
@@ -281,7 +283,7 @@ public class Application {
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 1:
-                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
+                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables; // Récupère la liste des tables
                 for (int i = 0; i < allTables.size(); i++) {
                     for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
                         System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesBoissonsCommandees);
@@ -307,6 +309,41 @@ public class Application {
         // Ajouter demande si enregistrement dans un fichier
     }
 
+    public void ecranGestionPersonnel(Scanner scanner) {
+        displayGestionPersonnelMenu();
+
+        int choixEcran = scanner.nextInt();
+        switch (choixEcran) {
+            case 1:
+                System.out.println("Entrez votre nom");
+                while (!scanner.hasNext()) {
+                    System.err.println("Erreur : Veuillez entrer votre nom");
+                    scanner.next(); // Consommer la saisie incorrecte
+                }
+                String nom = scanner.next();
+                // Consommer la fin de la ligne pour éviter les problèmes de décalage
+                scanner.nextLine();
+                System.out.println("Entrez votre prénom");
+                while (!scanner.hasNext()) {
+                    System.err.println("Erreur : Veuillez entrer votre prénom");
+                    scanner.next(); // Consommer la saisie incorrecte
+                }
+                String prenom = scanner.next();
+                // Consommer la fin de la ligne pour éviter les problèmes de décalage
+                scanner.nextLine():
+
+                break;
+            
+            case 2:
+                
+                break;
+
+            default:
+                startApp();
+                break;
+        }
+    }
+
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
     }
@@ -325,6 +362,7 @@ public class Application {
         System.out.println("2- Ecran cuisine");
         System.out.println("3- Ecran bar");
         System.out.println("4- Ecran Monitoring");
+        System.out.println("5- Ecran Gestion Personnel");
         System.out.println("0- Exit");
     }
 
@@ -345,6 +383,13 @@ public class Application {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
         System.out.println("1- Afficher les commandes à faire au bar");
+    }
+
+    private void displayGestionPersonnelMenu() {
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("0- Retour");
+        System.out.println("1- Ajouter serveur");
+        System.out.println("2- Distribution des tables");
     }
 
     public static void main(String[] args) {
