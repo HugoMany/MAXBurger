@@ -237,7 +237,6 @@ public class Application {
         carteDuRestorant.printCarteBoisson();
 
         while (!commandeEnd) {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Saisissez le n° de la boisson choisi.(0 : pour valider la commande, -1 : annuler)");
             int choixEcran = scanner.nextInt();
             if (choixEcran == -1) {
@@ -350,25 +349,62 @@ public class Application {
     public void ecranBar(Scanner scanner) {
         displayBarMenu();
 
-        int choixEcran = scanner.nextInt();
+         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 1:
-                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables; // Récupère la liste
-                                                                                                  // des tables
+                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
+                int indexPrint = 0;
                 for (int i = 0; i < allTables.size(); i++) {
                     for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
-                        System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesBoissonsCommandees);
-                        // (allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes)
+                        indexPrint++;
+                        if (!allTables.get(i).tableauDeCommandes.get(y).isPret()) {
+                            System.out.println(indexPrint + "- "
+                                    + allTables.get(i).tableauDeCommandes.get(y).listeDesBoissonsCommandees);
+                        }
+
                     }
                 }
-                System.out.println("0- Pour continuer");
-                scanner.nextInt();
+                System.out.println("0- Pour continuer \n 1à99- Pour Valider");
+                int choixCommandePrete = scanner.nextInt();
+                if (choixCommandePrete == 0) {
+                    mainMenu(scanner);
+                } else {
+                    int indexChoisi = 0;
+                    for (int i = 0; i < allTables.size(); i++) {
+                        for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
+                            indexChoisi++;
+                            if (choixCommandePrete == indexChoisi) {
+                                allTables.get(i).tableauDeCommandes.get(y).setPret(true);
+                                Commande commandeModifie = allTables.get(i).tableauDeCommandes.get(y);
+                                Journee journeeActuelle = listeDesJournée.get(currentDay);
+
+                                // Récupérer la liste des tables de la journée actuelle
+                                ArrayList<Table> listeDesTables = journeeActuelle.listeDesTables;
+
+                                // Récupérer la table spécifique à mettre à jour
+                                Table tableAModifier = listeDesTables.get(i);
+
+                                // Ajouter une nouvelle commande à la table
+                                tableAModifier.tableauDeCommandes.add(commandeModifie);
+
+                                // Mettre à jour la table dans la liste des tables
+                                listeDesTables.set(i, tableAModifier);
+
+                                // Mettre à jour la journée dans la liste générale
+                                listeDesJournée.set(currentDay, journeeActuelle);
+                            }
+                            // System.out.println(indexPrint+"-
+                            // "+allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
+                            System.out.println("Commande N°" + indexChoisi + " à été validé");
+
+                        }
+                    }
+                }
                 mainMenu(scanner);
                 break;
             default:
                 startApp();
                 break;
-        }
 
     }
 
