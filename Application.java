@@ -6,6 +6,9 @@ public class Application {
     // Constantes
     //
     public static final int NOMBRE_TABLE = 15;
+    public static final int NOMBRE_BOISSON_CARTE = 5;
+    public static final int NOMBRE_PLAT_CARTE = 11;
+
 
     //
     // Variables
@@ -167,9 +170,15 @@ public class Application {
                 commandeEnd = true;
                 return;
             }
-            if (choixEcran != 0) {
+            if (choixEcran != 0 && choixEcran <= NOMBRE_PLAT_CARTE) {
                 listePlatCommande.add(choixEcran);
                 System.out.println(carteDuRestorant.cartePlat[choixEcran - 1].nom);
+            }
+            else if(choixEcran > NOMBRE_PLAT_CARTE){
+                System.err.println("Erreur Chiffre mauvais");
+                System.out.println("0- Pour continuer");
+                scanner.nextInt();
+                mainMenu(scanner);
             } else {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
@@ -219,10 +228,17 @@ public class Application {
                 commandeEnd = true;
                 return;
             }
-            if (choixEcran != 0) {
+            if (choixEcran != 0 && choixEcran <= NOMBRE_BOISSON_CARTE) {
                 listeBoissonCommande.add(choixEcran);
                 System.out.println(carteDuRestorant.carteBoisson[choixEcran - 1].nom);
-            } else {
+            }
+            else if(choixEcran > NOMBRE_BOISSON_CARTE){
+                System.err.println("Erreur Chiffre mauvais");
+                System.out.println("0- Pour continuer");
+                scanner.nextInt();
+                mainMenu(scanner);
+            }
+            else{
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int boissonCode : listeBoissonCommande) {
@@ -346,7 +362,9 @@ public class Application {
         Facture hello = new Facture();
 		hello.lectureFichier();
 		hello.affichageMenuStatsTickets();
-
+        System.out.println("0- Pour continuer");
+        scanner.nextInt();
+        mainMenu(scanner);
         // Ajouter demande si enregistrement dans un fichier
     }
 
