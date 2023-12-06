@@ -31,7 +31,6 @@ public class Carte {
         return cartePlat;
     }
     public void printCartePlat() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
          for(int idx=0; idx< (this.cartePlat.length);idx++){
             System.out.println(this.cartePlat[idx]);
          }

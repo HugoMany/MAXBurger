@@ -9,7 +9,6 @@ public class Application {
     public static final int NOMBRE_BOISSON_CARTE = 5;
     public static final int NOMBRE_PLAT_CARTE = 11;
 
-
     //
     // Variables
     //
@@ -22,11 +21,25 @@ public class Application {
     //
     // Getters/Setters
     //
-    public ArrayList<Journee> getListeDesJournée() { return this.listeDesJournée; }
-    public int getCurrentDay() { return this.currentDay; }
-    public Carte getCarteDuRestorant() { return this.carteDuRestorant; }
-    public ArrayList<Personnel> getListeDesEmployees() { return this.listeDesEmployees; }
-    public Boolean isTableDuJourDejaDistribuee() { return this.tableDuJourDejaDistribué; }
+    public ArrayList<Journee> getListeDesJournée() {
+        return this.listeDesJournée;
+    }
+
+    public int getCurrentDay() {
+        return this.currentDay;
+    }
+
+    public Carte getCarteDuRestorant() {
+        return this.carteDuRestorant;
+    }
+
+    public ArrayList<Personnel> getListeDesEmployees() {
+        return this.listeDesEmployees;
+    }
+
+    public Boolean isTableDuJourDejaDistribuee() {
+        return this.tableDuJourDejaDistribué;
+    }
 
     public void addAJournee(Journee newJournee) {
         this.listeDesJournée.add(newJournee);
@@ -34,6 +47,7 @@ public class Application {
             newJournee.listeDesTables.add(new Table(i, getRandomNumber(1, 5) * 2));
         }
     }
+
     public void ajouterEmploye(Personnel personnel) {
         this.listeDesEmployees.add(personnel);
     }
@@ -82,11 +96,9 @@ public class Application {
             int choixEcran = scanner.nextInt();
             switch (choixEcran) {
                 case 1:
-                    carteDuRestorant.printCartePlat();
                     demandeNomEtNumeroTable(0, scanner);
                     break;
                 case 2:
-                    carteDuRestorant.printCarteBoisson();
                     demandeNomEtNumeroTable(1, scanner);
                     break;
                 default:
@@ -104,6 +116,7 @@ public class Application {
         // nom = scanner.nextLine();
 
         // NOMBRE DE CLIENTS
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("1-Nouveau client : ");
         System.out.println("2-Client ayant deja une table: ");
         while (!scanner.hasNextInt()) {
@@ -112,8 +125,9 @@ public class Application {
         }
         int choixNewOrOld = scanner.nextInt();
 
-        //Choix Si NOUVEAU CLIENTS
+        // Choix Si NOUVEAU CLIENTS
         if (choixNewOrOld == 1) {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Entrez le nombre de clients : ");
             while (!scanner.hasNextInt()) {
                 System.err.println("Erreur : Veuillez entrer un nombre valide.");
@@ -133,25 +147,25 @@ public class Application {
             Journee journee = getListeDesJournée().get(getCurrentDay());
             numeroTable = journee.conduireATable(nbClients);
 
-            
-        } 
-         //Choix Si LES CLIENTS ONT DEJA UNE TABLE
+        }
+        // Choix Si LES CLIENTS ONT DEJA UNE TABLE
         else {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Entrez le numéro de table : ");
             while (!scanner.hasNextInt()) {
                 System.err.println("Erreur : Veuillez entrer un numéro de table valide.");
                 scanner.next(); // Consommer la saisie incorrecte
             }
             numeroTable = scanner.nextInt();
-    
+
             // Consommer la fin de la ligne pour éviter les problèmes de décalage
             scanner.nextLine();
-    
-        }   
+
+        }
         if (type == 0) {
-                        priseCommandePlat(nom, numeroTable, scanner);
-                    } else if (type == 1) {
-                        priseCommandeBoisson(nom, numeroTable, scanner);
+            priseCommandePlat(nom, numeroTable, scanner);
+        } else if (type == 1) {
+            priseCommandeBoisson(nom, numeroTable, scanner);
         }
     }
 
@@ -159,6 +173,7 @@ public class Application {
         // A finir
         nomClient = "many";
 
+        carteDuRestorant.printCartePlat();
         Commande newCommande = new Commande(nomClient, numTable);
         ArrayList<Integer> listePlatCommande = new ArrayList<>();
         boolean commandeEnd = false;
@@ -173,8 +188,7 @@ public class Application {
             if (choixEcran != 0 && choixEcran <= NOMBRE_PLAT_CARTE) {
                 listePlatCommande.add(choixEcran);
                 System.out.println(carteDuRestorant.cartePlat[choixEcran - 1].nom);
-            }
-            else if(choixEcran > NOMBRE_PLAT_CARTE){
+            } else if (choixEcran > NOMBRE_PLAT_CARTE) {
                 System.err.println("Erreur Chiffre mauvais");
                 System.out.println("0- Pour continuer");
                 scanner.nextInt();
@@ -220,8 +234,10 @@ public class Application {
         Commande newCommande = new Commande(nomClient, numTable);
         ArrayList<Integer> listeBoissonCommande = new ArrayList<>();
         boolean commandeEnd = false;
+        carteDuRestorant.printCarteBoisson();
 
         while (!commandeEnd) {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.println("Saisissez le n° de la boisson choisi.(0 : pour valider la commande, -1 : annuler)");
             int choixEcran = scanner.nextInt();
             if (choixEcran == -1) {
@@ -231,14 +247,12 @@ public class Application {
             if (choixEcran != 0 && choixEcran <= NOMBRE_BOISSON_CARTE) {
                 listeBoissonCommande.add(choixEcran);
                 System.out.println(carteDuRestorant.carteBoisson[choixEcran - 1].nom);
-            }
-            else if(choixEcran > NOMBRE_BOISSON_CARTE){
+            } else if (choixEcran > NOMBRE_BOISSON_CARTE) {
                 System.err.println("Erreur Chiffre mauvais");
                 System.out.println("0- Pour continuer");
                 scanner.nextInt();
                 mainMenu(scanner);
-            }
-            else{
+            } else {
                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 System.out.println("La commande a été validée, elle contient :");
                 for (int boissonCode : listeBoissonCommande) {
@@ -277,30 +291,29 @@ public class Application {
         switch (choixEcran) {
             case 1:
                 ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
-                int indexPrint=0;
+                int indexPrint = 0;
                 for (int i = 0; i < allTables.size(); i++) {
                     for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
                         indexPrint++;
                         if (!allTables.get(i).tableauDeCommandes.get(y).isPret()) {
-                            System.out.println(indexPrint+"- "+allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
+                            System.out.println(indexPrint + "- "
+                                    + allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
                         }
-                        
 
                     }
                 }
                 System.out.println("0- Pour continuer \n 1à99- Pour Valider");
-                int choixCommandePrete= scanner.nextInt();
-                if (choixCommandePrete==0) {
+                int choixCommandePrete = scanner.nextInt();
+                if (choixCommandePrete == 0) {
                     mainMenu(scanner);
-                }
-                else{
-                    int indexChoisi=0;
+                } else {
+                    int indexChoisi = 0;
                     for (int i = 0; i < allTables.size(); i++) {
                         for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
                             indexChoisi++;
-                            if(choixCommandePrete==indexChoisi){
+                            if (choixCommandePrete == indexChoisi) {
                                 allTables.get(i).tableauDeCommandes.get(y).setPret(true);
-                                Commande commandeModifie=allTables.get(i).tableauDeCommandes.get(y);
+                                Commande commandeModifie = allTables.get(i).tableauDeCommandes.get(y);
                                 Journee journeeActuelle = listeDesJournée.get(currentDay);
 
                                 // Récupérer la liste des tables de la journée actuelle
@@ -318,8 +331,9 @@ public class Application {
                                 // Mettre à jour la journée dans la liste générale
                                 listeDesJournée.set(currentDay, journeeActuelle);
                             }
-                            //System.out.println(indexPrint+"- "+allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
-                            System.out.println("Commande N°"+indexChoisi+" à été validé");
+                            // System.out.println(indexPrint+"-
+                            // "+allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
+                            System.out.println("Commande N°" + indexChoisi + " à été validé");
 
                         }
                     }
@@ -339,7 +353,8 @@ public class Application {
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 1:
-                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables; // Récupère la liste des tables
+                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables; // Récupère la liste
+                                                                                                  // des tables
                 for (int i = 0; i < allTables.size(); i++) {
                     for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
                         System.out.println(allTables.get(i).tableauDeCommandes.get(y).listeDesBoissonsCommandees);
@@ -360,8 +375,8 @@ public class Application {
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
         Facture hello = new Facture();
-		hello.lectureFichier();
-		hello.affichageMenuStatsTickets();
+        hello.lectureFichier();
+        hello.affichageMenuStatsTickets();
         System.out.println("0- Pour continuer");
         scanner.nextInt();
         mainMenu(scanner);
@@ -395,31 +410,37 @@ public class Application {
                 ajouterEmploye(newServeur);
 
                 break;
-            
+
             case 2: // Distribution des tables
                 if (isTableDuJourDejaDistribuee() == false) {
                     ArrayList<Serveur> listeDesServeurs = new ArrayList<>();
                     for (Personnel iPersonnel : getListeDesEmployees()) { // Pour tout le personnel
                         if (iPersonnel instanceof Serveur) { // On verifie si le personnel est un serveur
-                            listeDesServeurs.add((Serveur) iPersonnel); // on cast le personnel en serveur et on l'ajoute dans la liste des serveurs
+                            listeDesServeurs.add((Serveur) iPersonnel); // on cast le personnel en serveur et on
+                                                                        // l'ajoute dans la liste des serveurs
                         }
                     }
 
                     int nbServeurs = listeDesServeurs.size();
                     int nbTablesParServeur = NOMBRE_TABLE / nbServeurs;
-                    int resteDivisionEuclidienne = NOMBRE_TABLE % nbServeurs; // On va compter les tables "en trop" comme un decompteur
-                    int nbTableDejaDistribuee = 0; // On va compter le nombre de table que l'on distribue comme un compteur
+                    int resteDivisionEuclidienne = NOMBRE_TABLE % nbServeurs; // On va compter les tables "en trop"
+                                                                              // comme un decompteur
+                    int nbTableDejaDistribuee = 0; // On va compter le nombre de table que l'on distribue comme un
+                                                   // compteur
 
                     for (Serveur iServeur : listeDesServeurs) { // Pour tout les serveur
                         ArrayList<Table> tableDuServeur = new ArrayList<>(); // On cree sa liste de table
-                        for(int iTable = nbTableDejaDistribuee; iTable < nbTablesParServeur; iTable++) {
+                        for (int iTable = nbTableDejaDistribuee; iTable < nbTablesParServeur; iTable++) {
                             Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
-                            tableDuServeur.add(journee.getListeDesTables().get(iTable)); // On ajoute cette table a la liste
+                            tableDuServeur.add(journee.getListeDesTables().get(iTable)); // On ajoute cette table a la
+                                                                                         // liste
                             nbTableDejaDistribuee++;
                         }
                         if (resteDivisionEuclidienne > 0) {
                             Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
-                            tableDuServeur.add(journee.getListeDesTables().get(nbTableDejaDistribuee)); // On ajoute cette table a la liste
+                            tableDuServeur.add(journee.getListeDesTables().get(nbTableDejaDistribuee)); // On ajoute
+                                                                                                        // cette table a
+                                                                                                        // la liste
                             nbTableDejaDistribuee++;
                             resteDivisionEuclidienne--;
                         }
