@@ -3,4 +3,8 @@ public class Ingredients {
     public Ingredients(String nom){
         this.nom=nom;
     }
+    @Override
+    public String toString() {
+        return this.nom;
+    }
 }

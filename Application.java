@@ -329,6 +329,7 @@ public class Application {
 
                                 // Mettre à jour la journée dans la liste générale
                                 listeDesJournée.set(currentDay, journeeActuelle);
+                                commandeModifie.getAllIngredientsFromPlat();
                             }
                             // System.out.println(indexPrint+"-
                             // "+allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
@@ -337,6 +338,8 @@ public class Application {
                         }
                     }
                 }
+                System.out.println("0- Pour continuer");
+                scanner.nextInt();
                 mainMenu(scanner);
                 break;
             default:
@@ -349,7 +352,7 @@ public class Application {
     public void ecranBar(Scanner scanner) {
         displayBarMenu();
 
-         int choixEcran = scanner.nextInt();
+        int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 1:
                 ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
@@ -392,6 +395,7 @@ public class Application {
 
                                 // Mettre à jour la journée dans la liste générale
                                 listeDesJournée.set(currentDay, journeeActuelle);
+
                             }
                             // System.out.println(indexPrint+"-
                             // "+allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);
@@ -400,15 +404,16 @@ public class Application {
                         }
                     }
                 }
+                System.out.println("0- Pour continuer");
+                scanner.nextInt();
                 mainMenu(scanner);
                 break;
             default:
                 startApp();
                 break;
 
+        }
     }
-}
-
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
         Facture hello = new Facture();
@@ -458,12 +463,12 @@ public class Application {
                 }
                 // On récupère en premier la liste des serveurs
                 ArrayList<Serveur> listeDesServeurs = new ArrayList<>();
-                    for (Personnel iPersonnel : getListeDesEmployees()) { // Pour tout le personnel
-                        if (iPersonnel instanceof Serveur) { // On verifie si le personnel est un serveur
-                            listeDesServeurs.add((Serveur) iPersonnel); // on cast le personnel en serveur et on
-                                                                        // l'ajoute dans la liste des serveurs
-                        }
+                for (Personnel iPersonnel : getListeDesEmployees()) { // Pour tout le personnel
+                    if (iPersonnel instanceof Serveur) { // On verifie si le personnel est un serveur
+                        listeDesServeurs.add((Serveur) iPersonnel); // on cast le personnel en serveur et on
+                                                                    // l'ajoute dans la liste des serveurs
                     }
+                }
 
                 // Distribution des tables (une fois par jour)
                 if (isTableDuJourDejaDistribuee() == false) {
@@ -476,9 +481,20 @@ public class Application {
 
                     for (Serveur iServeur : listeDesServeurs) { // Pour tout les serveur
                         ArrayList<Table> tableDuServeur = new ArrayList<>(); // On cree sa liste de table
-                        int dernierNumeroTableADistribuerACeServeur = nbTablesParServeur + nbTableDejaDistribuee; // On regarde quel sera la derniere table à donner à ce serveur
+                        int dernierNumeroTableADistribuerACeServeur = nbTablesParServeur + nbTableDejaDistribuee; // On
+                                                                                                                  // regarde
+                                                                                                                  // quel
+                                                                                                                  // sera
+                                                                                                                  // la
+                                                                                                                  // derniere
+                                                                                                                  // table
+                                                                                                                  // à
+                                                                                                                  // donner
+                                                                                                                  // à
+                                                                                                                  // ce
+                                                                                                                  // serveur
                         for (int iTable = nbTableDejaDistribuee; iTable < dernierNumeroTableADistribuerACeServeur; iTable++) {
-                            
+
                             Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
                             tableDuServeur.add(journee.getListeDesTables().get(iTable)); // On ajoute cette table a la
                                                                                          // liste
@@ -506,12 +522,12 @@ public class Application {
                 scanner.nextInt();
                 mainMenu(scanner);
                 break;
-                 
+
             default:
                 startApp();
                 break;
         }
-        
+
     }
 
     public int getRandomNumber(int min, int max) {
