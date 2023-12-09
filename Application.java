@@ -422,9 +422,10 @@ public class Application {
 
     public void ecranGestionPersonnel(Scanner scanner) {
         displayGestionPersonnelMenu();
-
         int choixEcran = scanner.nextInt();
+
         switch (choixEcran) {
+
             case 1: // Ajouter serveur
                 System.out.println("Entrez votre nom");
                 while (!scanner.hasNext()) {
@@ -449,8 +450,12 @@ public class Application {
                 break;
 
             case 2: // Distribution des tables
-                if (isTableDuJourDejaDistribuee() == false) {
-                    ArrayList<Serveur> listeDesServeurs = new ArrayList<>();
+                if (getListeDesEmployees().isEmpty()) {
+                    System.err.println("Il n'y a pas de serveurs embauchés.");
+                    break;
+                }
+                // On récupère en premier la liste des serveurs
+                ArrayList<Serveur> listeDesServeurs = new ArrayList<>();
                     for (Personnel iPersonnel : getListeDesEmployees()) { // Pour tout le personnel
                         if (iPersonnel instanceof Serveur) { // On verifie si le personnel est un serveur
                             listeDesServeurs.add((Serveur) iPersonnel); // on cast le personnel en serveur et on
@@ -458,6 +463,7 @@ public class Application {
                         }
                     }
 
+                if (isTableDuJourDejaDistribuee() == false) {
                     int nbServeurs = listeDesServeurs.size();
                     int nbTablesParServeur = NOMBRE_TABLE / nbServeurs;
                     int resteDivisionEuclidienne = NOMBRE_TABLE % nbServeurs; // On va compter les tables "en trop"
@@ -482,10 +488,14 @@ public class Application {
                             resteDivisionEuclidienne--;
                         }
                         iServeur.addTables(tableDuServeur);
+                        this.tableDuJourDejaDistribué = true;
                     }
                 }
+                for (Serveur iServeur : listeDesServeurs) {
+                    iServeur.printTableGeres();
+                }
                 break;
-
+                 
             default:
                 startApp();
                 break;
