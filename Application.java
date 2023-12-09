@@ -17,6 +17,7 @@ public class Application {
     public Carte carteDuRestorant = new Carte();
     protected ArrayList<Personnel> listeDesEmployees = new ArrayList<Personnel>();
     protected Boolean tableDuJourDejaDistribué = false;
+    protected Stock stockGlbaleStock = new Stock();
 
     //
     // Getters/Setters
@@ -329,7 +330,10 @@ public class Application {
 
                                 // Mettre à jour la journée dans la liste générale
                                 listeDesJournée.set(currentDay, journeeActuelle);
-                                commandeModifie.getAllIngredientsFromPlat();
+                                ArrayList<Ingredients> retListOfIngredients = commandeModifie.getAllIngredientsFromPlat();
+                                stockGlbaleStock.removeStock(retListOfIngredients);
+                                System.out.println("Ingrédients Supprimer du stock");
+
                             }
                             // System.out.println(indexPrint+"-
                             // "+allTables.get(i).tableauDeCommandes.get(y).listeDesPlatsCommandes);

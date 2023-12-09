@@ -41,13 +41,15 @@ public class Commande {
 	public ArrayList<Boisson> getBoisson() {
 		return listeDesBoissonsCommandees;
 	}
-	public void getAllIngredientsFromPlat(){
+	public ArrayList<Ingredients> getAllIngredientsFromPlat(){
+		ArrayList<Ingredients> retListOfIngredients = new ArrayList<Ingredients>();
 		for (int i = 0; i < listeDesPlatsCommandes.size(); i++) {
 			for (int j = 0; j < listeDesPlatsCommandes.get(i).listeDIngredient.length; j++) {
-				System.out.println(listeDesPlatsCommandes.get(i).listeDIngredient[j]);
-				
+				// System.out.println(listeDesPlatsCommandes.get(i).listeDIngredient[j]);
+				retListOfIngredients.add(listeDesPlatsCommandes.get(i).listeDIngredient[j]);
 			}
 		}
+		return retListOfIngredients;
 	}
 
 }
