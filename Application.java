@@ -540,8 +540,4 @@ public class Application {
         System.out.println("2- Distribution des tables");
     }
 
-    public static void main(String[] args) {
-        Application application = new Application();
-        application.startApp();
-    }
 }
