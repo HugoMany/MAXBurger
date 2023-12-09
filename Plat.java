@@ -5,12 +5,12 @@ public class Plat {
     protected int id;
     protected String nom;
     protected double prix;
-    protected Ingredients[] listeDIngredient ;
-    protected Plat(int id, String nom, double prix,Ingredients[] listeDIngredient){
+    //protected Ingredients[] listeDIngredient ;
+    protected Plat(int id, String nom, double prix){
         this.id = id;
         this.nom = nom;
         this.prix = prix;
-        this.listeDIngredient = listeDIngredient;
+        //this.listeDIngredient = listeDIngredient;
     }
     
     public int getId() { return this.id ; }

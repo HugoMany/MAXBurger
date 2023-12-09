@@ -2,7 +2,7 @@ public class Carte {
     
     protected Plat[] cartePlat = 
     {
-        new Plat(1, "Salade",9.0, {new Ingredients("Salade")}),
+        new Plat(1, "Salade",9.0),
         new Plat(2, "Salade Tomate",9.0),
         new Plat(3, "Potage Potimarron",8.0),
         new Plat(4, "Potage Tomate",8.0),
