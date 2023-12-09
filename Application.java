@@ -84,6 +84,8 @@ public class Application {
                 break;
             case 5:
                 ecranGestionPersonnel(scanner);
+            case 6:
+                affichageStock(scanner);
             default:
                 startApp();
                 break;
@@ -330,7 +332,8 @@ public class Application {
 
                                 // Mettre à jour la journée dans la liste générale
                                 listeDesJournée.set(currentDay, journeeActuelle);
-                                ArrayList<Ingredients> retListOfIngredients = commandeModifie.getAllIngredientsFromPlat();
+                                ArrayList<Ingredients> retListOfIngredients = commandeModifie
+                                        .getAllIngredientsFromPlat();
                                 stockGlbaleStock.removeStock(retListOfIngredients);
                                 System.out.println("Ingrédients Supprimer du stock");
 
@@ -418,6 +421,7 @@ public class Application {
 
         }
     }
+
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
         Facture hello = new Facture();
@@ -534,6 +538,15 @@ public class Application {
 
     }
 
+    public void affichageStock(Scanner scanner) {
+        for (int i = 0; i < this.stockGlbaleStock.listDesIngredientsDispo.size(); i++) {
+            System.out.print(this.stockGlbaleStock.listDesIngredientsDispo.get(i).nom + " ; ");
+        }
+        System.out.println("\n0- Pour continuer");
+        scanner.nextInt();
+        mainMenu(scanner);
+    }
+
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
     }
@@ -553,6 +566,7 @@ public class Application {
         System.out.println("3- Ecran bar");
         System.out.println("4- Ecran Monitoring");
         System.out.println("5- Ecran Gestion Personnel");
+        System.out.println("6- Afficher Stock");
         System.out.println("0- Exit");
     }
 
