@@ -407,6 +407,7 @@ public class Application {
                 break;
 
     }
+}
 
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
