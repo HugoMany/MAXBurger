@@ -422,9 +422,10 @@ public class Application {
 
     public void ecranGestionPersonnel(Scanner scanner) {
         displayGestionPersonnelMenu();
-
         int choixEcran = scanner.nextInt();
+
         switch (choixEcran) {
+
             case 1: // Ajouter serveur
                 System.out.println("Entrez votre nom");
                 while (!scanner.hasNext()) {
@@ -445,12 +446,18 @@ public class Application {
 
                 Serveur newServeur = new Serveur(nom, prenom);
                 ajouterEmploye(newServeur);
-
                 break;
 
             case 2: // Distribution des tables
-                if (isTableDuJourDejaDistribuee() == false) {
-                    ArrayList<Serveur> listeDesServeurs = new ArrayList<>();
+                if (getListeDesEmployees().isEmpty()) {
+                    System.err.println("Il n'y a pas de serveurs embauchés.");
+                    System.out.println("0- Pour continuer");
+                    scanner.nextInt();
+                    mainMenu(scanner);
+                    break;
+                }
+                // On récupère en premier la liste des serveurs
+                ArrayList<Serveur> listeDesServeurs = new ArrayList<>();
                     for (Personnel iPersonnel : getListeDesEmployees()) { // Pour tout le personnel
                         if (iPersonnel instanceof Serveur) { // On verifie si le personnel est un serveur
                             listeDesServeurs.add((Serveur) iPersonnel); // on cast le personnel en serveur et on
@@ -458,6 +465,8 @@ public class Application {
                         }
                     }
 
+                // Distribution des tables (une fois par jour)
+                if (isTableDuJourDejaDistribuee() == false) {
                     int nbServeurs = listeDesServeurs.size();
                     int nbTablesParServeur = NOMBRE_TABLE / nbServeurs;
                     int resteDivisionEuclidienne = NOMBRE_TABLE % nbServeurs; // On va compter les tables "en trop"
@@ -467,7 +476,9 @@ public class Application {
 
                     for (Serveur iServeur : listeDesServeurs) { // Pour tout les serveur
                         ArrayList<Table> tableDuServeur = new ArrayList<>(); // On cree sa liste de table
-                        for (int iTable = nbTableDejaDistribuee; iTable < nbTablesParServeur; iTable++) {
+                        int dernierNumeroTableADistribuerACeServeur = nbTablesParServeur + nbTableDejaDistribuee; // On regarde quel sera la derniere table à donner à ce serveur
+                        for (int iTable = nbTableDejaDistribuee; iTable < dernierNumeroTableADistribuerACeServeur; iTable++) {
+                            
                             Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
                             tableDuServeur.add(journee.getListeDesTables().get(iTable)); // On ajoute cette table a la
                                                                                          // liste
@@ -482,14 +493,25 @@ public class Application {
                             resteDivisionEuclidienne--;
                         }
                         iServeur.addTables(tableDuServeur);
+                        this.tableDuJourDejaDistribué = true;
                     }
                 }
-                break;
 
+                // Affichage des tables
+                System.out.println("\nDistribution du jour :");
+                for (Serveur iServeur : listeDesServeurs) {
+                    iServeur.printTableGeres();
+                }
+                System.out.println("\n0- Pour continuer");
+                scanner.nextInt();
+                mainMenu(scanner);
+                break;
+                 
             default:
                 startApp();
                 break;
         }
+        
     }
 
     public int getRandomNumber(int min, int max) {
