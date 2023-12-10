@@ -159,6 +159,9 @@ public class Application {
             // ASSIGNATION D'UNE TABLE
             Journee journee = getListeDesJournee().get(getCurrentDay());
             numeroTable = journee.conduireATable(nbClients);
+            if (numeroTable != 0) {
+                getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numeroTable).setTableOccupee(true); // On dit que cette table est desormais occupée
+            }
 
             if (type == 0) { // Si c'est des plats
                 priseCommandePlat(numeroTable, scanner);
@@ -451,6 +454,7 @@ public class Application {
         //int choixEcran = scanner.nextInt();
         // switch (choixEcran) {
         //     case 1:
+                System.out.println("");
                 ArrayList<Table> allTables = this.listeDesJournee.get(currentDay).listeDesTables;
                 int indexPrint = 0;
                 for (int i = 0; i < allTables.size(); i++) {
@@ -463,13 +467,13 @@ public class Application {
 
                     }
                 }
-                System.out.println("0- Pour continuer \n 1à99- Pour Valider");
+                System.out.println("\n1 à 99- Pour Valider \n0- Pour retourner au menu");
                 int choixCommandePrete = scanner.nextInt();
                 if (choixCommandePrete == 0) {
                     mainMenu(scanner);
                 } else {
                     int indexChoisi = 0;
-                    for (int i = 0; i < allTables.size(); i++) {
+                    for (int i = 0; i < NOMBRE_TABLE; i++) {
                         for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
                             indexChoisi++;
                             if (choixCommandePrete == indexChoisi) {
@@ -494,7 +498,7 @@ public class Application {
                                 ArrayList<Ingredients> retListOfIngredients = commandeModifie
                                         .getAllIngredientsFromPlat();
                                 stockGlbaleStock.removeStock(retListOfIngredients);
-                                System.out.println("Ingrédients Supprimer du stock");
+                                //System.out.println("Ingrédients Supprimer du stock");
 
                             }
                             // System.out.println(indexPrint+"-
@@ -504,7 +508,7 @@ public class Application {
                         }
                     }
                 }
-                System.out.println("0- Pour continuer");
+                System.out.println("\n0- Pour continuer");
                 scanner.nextInt();
                 mainMenu(scanner);
                 //break;
@@ -805,6 +809,13 @@ public class Application {
         System.out.println("Entrez le numéro de table");
         int numTable = scanner.nextInt();
 
+        if (getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).isTableOccupee() == false) {
+            System.err.println("Il n'y a pas de commande sur cette table actuellement.");
+            System.out.println("\n0- Pour continuer");
+            scanner.nextInt();
+            mainMenu(scanner);
+        }
+
         // On récupère la liste des journées, on regarde le jour actuel, on récupère la liste des tables du jour et on selectionne celle qui nous interesse
         // enfin on prend la derniere commande sur cette table.
         int numCommande = getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getNombreDeCommandesTable();;
@@ -815,9 +826,9 @@ public class Application {
         //additionAEditer.enregistrementFichier(currentDay);
         additionAEditer.editionTicket(currentDay);
 
-        getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getTableauDeCommande().get(numCommande).setRegle(true);
-        System.out.println(getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getTableauDeCommande().get(numCommande).isRegle());
-        
+        // On dit que cette table n'est plus occupée
+        getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).setTableOccupee(false);
+
         System.out.println("\n0- Pour continuer");
         scanner.nextInt();
         mainMenu(scanner);

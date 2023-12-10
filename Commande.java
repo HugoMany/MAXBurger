@@ -4,7 +4,6 @@ public class Commande {
 	
 	protected int numeroDeCommande;
 	protected boolean pret = false;
-	protected boolean regle = false;
 	protected ArrayList<Plat> listeDesPlatsCommandes = new ArrayList<Plat>();
 	protected ArrayList<Boisson> listeDesBoissonsCommandees = new ArrayList<Boisson>();
 	protected double addition = 0;
@@ -16,12 +15,10 @@ public class Commande {
 	
 	public double getAddition() { return this.addition; }
 	public boolean isPret() { return this.pret; }
-	public boolean isRegle() { return this.regle; }
 	public ArrayList<Plat> getPlat() { return this.listeDesPlatsCommandes; }
 	public ArrayList<Boisson> getBoisson() { return this.listeDesBoissonsCommandees; }
 
 	public void setPret(boolean bool) { this.pret = bool;	}
-	public void setRegle(boolean bool) { this.regle = bool; }
 	
 
 	// Ajout d'un plat à la commande
