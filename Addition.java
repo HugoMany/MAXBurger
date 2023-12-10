@@ -129,7 +129,7 @@ public class Addition {
     public void editionTicket(int numJour) {
         // try-with-resources
         Charset charset = Charset.forName ("windows-1252");
-        String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable;
+        String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable + " Commande n" + numCommande;
         String texte = "# Ticket Table n" + numTable + "\n\n\n";
 
         texte += listeDesPlatsTicket();
@@ -160,8 +160,8 @@ public class Addition {
         // try-with-resources
 
         Charset charset = Charset.forName ("windows-1252");
-        String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable;
-        String texte = "# Ticket Table n" + numTable + "\n\n\n";
+        String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable + " Commande n" + numCommande;
+        String texte = "# Ticket Table n" + numTable + " - Commande n" + numCommande + "\n\n\n";
 
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), charset)) {
 
