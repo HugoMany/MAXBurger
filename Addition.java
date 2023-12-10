@@ -17,6 +17,8 @@ import java.text.NumberFormat;
 
 public class Addition {
     
+    protected int idCommande;
+    protected int numCommande;
     protected int numTable;
     protected double somme = 0;
     protected ArrayList<Plat> listeDesPlats;
@@ -57,6 +59,9 @@ public class Addition {
 
     // On récupère les éléments commandéss de la classe Commande entrée en paramètre et on lance le calcul de l'addition
     public void newAddition(Commande maCommande) {
+        this.idCommande = maCommande.numeroDeCommande;
+        this.numTable = idCommande % 100;
+        this.numCommande = idCommande - numCommande * 100;
         this.listeDesPlats = new ArrayList<Plat> (maCommande.getPlat());
         this.listeDesBoissons = new ArrayList<Boisson> (maCommande.getBoisson());
         calculAddition();
@@ -68,7 +73,7 @@ public class Addition {
         if (this.listeDesPlats == null) { return "Aucun plat\n";}
         else {
             for (int i = 0; i < listeDesPlats.size(); i++) {
-                liste += listeDesPlats.get(i).getNom() + "- \t" + listeDesPlats.get(i).getPrix() + " €\n";
+                liste += listeDesPlats.get(i).getNom() + "- \t" + listeDesPlats.get(i).getPrix() + " e\n";
             }
             return liste;
         }
@@ -80,7 +85,7 @@ public class Addition {
         if (this.listeDesPlats == null) { return "Aucune boisson\n";}
         else {
             for (int i = 0; i < listeDesBoissons.size(); i++) {
-                liste += listeDesBoissons.get(i).getNom() + "- \t" + listeDesBoissons.get(i).getPrix() + " €\n";
+                liste += listeDesBoissons.get(i).getNom() + "- \t" + listeDesBoissons.get(i).getPrix() + " e\n";
             }
             return liste;
         }
