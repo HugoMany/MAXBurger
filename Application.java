@@ -577,10 +577,10 @@ public class Application {
         System.out.println("1- Ecran prise de commande");
         System.out.println("2- Ecran cuisine");
         System.out.println("3- Ecran bar");
-        System.out.println("4- Ecran Monitoring");
-        System.out.println("5- Ecran Gestion Personnel");
-        System.out.println("6- Afficher Stock");
-        System.out.println("7- Prochaine Journée");
+        System.out.println("4- Ecran monitoring");
+        System.out.println("5- Ecran gestion personnel");
+        System.out.println("6- Afficher stock");
+        System.out.println("7- Prochaine journée");
         System.out.println("0- Exit");
     }
 
