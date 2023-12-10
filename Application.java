@@ -153,8 +153,8 @@ public class Application {
             }
 
             int nbClients = scanner.nextInt();
-            if (nbClients > 8) {
-                System.err.println("Erreur;");
+            if (nbClients > 10) {
+                System.err.println("Il n'y a pas de table pour autant de clients");
                 mainMenu(scanner);
                 ;
             }
@@ -192,7 +192,17 @@ public class Application {
         nomClient = "many";
 
         carteDuRestorant.printCartePlat();
-        Commande newCommande = new Commande(nomClient, numTable);
+
+        // EXPLICATION NUMERO DE COMMANDE
+        /*
+         * Le numero de commande se divise en deux parties, le début correspond au numéro de la table et la fin correspond à la nième commande sur cette table
+         * Par exemple, si le numéro de commande est 1018, il faut lire séparement 10 et 18 ce qui indique qu'il s'agit de la 18ème commande sur la table 10
+         * Pour accéder au numéro de la table à partir du numéro de commande on divise par 100
+         * Pour accéder au numéro de la commande en elle même on fait un modulo 100
+         */
+        int numeroDeCommande = numTable * 100 + getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getNombreDeCommandesTable();
+
+        Commande newCommande = new Commande(nomClient, numeroDeCommande);
         ArrayList<Integer> listePlatCommande = new ArrayList<>();
         boolean commandeEnd = false;
 

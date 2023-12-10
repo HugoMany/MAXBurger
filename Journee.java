@@ -21,7 +21,7 @@ public class Journee {
             	this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
                 tableIdeale = true;
                 numTable++;
-                System.out.println("Aller à la table n°" + numTable);
+                System.out.println("\nAller à la table n°" + numTable);
 
                 // TEST QUI AFFICHE LA LISTE DES TABLES AVEC LEURS NOMBRE DE PLACE MAXIMUM
                 // for (Table tabli : getListeDesTables()) {
