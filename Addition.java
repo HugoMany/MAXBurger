@@ -82,7 +82,7 @@ public class Addition {
     // On prépare une liste textuelle des boissons
     public String listeDesBoissonsTicket() {
         String liste = "";
-        if (this.listeDesPlats == null) { return "Aucune boisson\n";}
+        if (this.listeDesBoissons == null) { return "Aucune boisson\n";}
         else {
             for (int i = 0; i < listeDesBoissons.size(); i++) {
                 liste += listeDesBoissons.get(i).getNom() + "- \t" + listeDesBoissons.get(i).getPrix() + " e\n";
