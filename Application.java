@@ -641,6 +641,7 @@ public class Application {
 
     private void nextDay(Scanner scanner) {
         this.currentDay++;
+        this.tableDuJourDejaDistribué = false;
         addAJournee(new Journee(H_FERMETURE, H_OUVERTURE));
         System.out.println("Journée suivante!");
         System.out.println("\n0- Pour continuer");
