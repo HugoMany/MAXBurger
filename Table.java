@@ -5,7 +5,7 @@ public class Table {
 	protected int numeroTable;
 	protected int nombreDeCommandesTable = 0;
 	protected boolean tableOccupee = false;
-	protected ArrayList<Commande> tableauDeCommandes=new ArrayList<Commande>();
+	protected ArrayList<Commande> tableauDeCommandes = new ArrayList<Commande>();
 	protected int nbClientMax;
 
 	public int getNumeroTable() { return this.numeroTable; }
@@ -24,9 +24,9 @@ public class Table {
 		this.nbClientMax = nbClientMax;
 	}
 
-	public void ajouterCommande(String nomClient, ArrayList<Plat> listePlats, ArrayList<Boisson> listeBoissons) {
+	public void ajouterCommande(ArrayList<Plat> listePlats, ArrayList<Boisson> listeBoissons) {
 		incrNombreDeCommandesTable();
-		Commande commande = new Commande(nomClient, getNombreDeCommandesTable());
+		Commande commande = new Commande(getNombreDeCommandesTable());
 		// On ajoute tout les plats à la liste des plats de la commande
 		for (int platN = 0; platN < listePlats.size(); platN++) {
 			commande.ajoutPlatALaCommande(listePlats.get(platN));
