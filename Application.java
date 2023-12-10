@@ -825,12 +825,16 @@ public class Application {
         // On récupère la liste des journées, on regarde le jour actuel, on récupère la liste des tables du jour et on selectionne celle qui nous interesse
         // enfin on prend la derniere commande sur cette table.
         int numCommande = getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getNombreDeCommandesTable();;
-        
-        Commande commandeDemandee = listeDesJournee.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
+        System.out.println("ici ok");
+        Commande commandeDemandee = listeDesJournee.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande-1);
+        System.out.println("ici ok2");
         Addition additionAEditer = new Addition();
+        System.out.println("ici ok3");
         additionAEditer.newAddition(commandeDemandee);
+        System.out.println("ici ok4");
         //additionAEditer.enregistrementFichier(currentDay);
         additionAEditer.editionTicket(currentDay);
+        System.out.println("ici ok5");
 
         
         listeDesJournee.get(currentDay).factureJournee.setNouveauTicket(additionAEditer.numTable, additionAEditer.numCommande, additionAEditer.somme);
