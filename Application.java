@@ -593,9 +593,22 @@ public class Application {
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
         //Facture hello = new Facture();
-        listeDesJournee.get(currentDay).factureJournee.editionFichier(currentDay);
-        listeDesJournee.get(currentDay).factureJournee.affichageMenuStatsTickets();
-        //hello.affichageMenuStatsTickets();
+        displayChoixFacture();
+        if (scanner.hasNextInt()) {
+            int choixEcran = scanner.nextInt();
+            switch (choixEcran) {
+                case 1:
+                    listeDesJournee.get(currentDay).factureJournee.affichageMenuStatsTickets();
+                    break;
+                case 2:
+                    listeDesJournee.get(currentDay).factureJournee.editionFichier(currentDay);
+                    break;
+                default:
+                    mainMenu(scanner);
+                    break;
+            }
+        }
+        
         System.out.println("0- Pour continuer");
         scanner.nextInt();
         mainMenu(scanner);
@@ -892,6 +905,14 @@ public class Application {
         System.out.println("1- Menu des Plats");
         System.out.println("2- Menu des Boissons");
     }
+
+    private void displayChoixFacture() {
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("0- Retour");
+        System.out.println("1- Afficher récap journée");
+        System.out.println("2- Enregistrer récap journée");
+    }
+
 
     // private void displayCuisineMenu() {
     //     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
