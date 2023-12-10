@@ -452,16 +452,30 @@ public class Application {
 
         switch (choixEcran) {
 
-            case 1: // Ajouter serveur
-                ajouterServeur(scanner);
+            case 1: // Affichage de la liste des employés
+                // On commence par afficher la liste des serveurs
+                System.out.println("\nServeurs :");
+                for (Personnel iPersonnel : getListeDesEmployees()) {
+                    if (iPersonnel instanceof Serveur) { // On verifie si le personnel est un serveur
+                        System.out.println(" " + iPersonnel.getPrenom() + " " + iPersonnel.getNom());
+                    }
+                }
+                System.out.println("\nCuisiniers :");
+                for (Personnel iPersonnel : getListeDesEmployees()) {
+                    if (iPersonnel instanceof Cuisinier) { // On verifie si le personnel est un serveur
+                        System.out.println(" " + iPersonnel.getPrenom() + " " + iPersonnel.getNom());
+                    }
+                }
+                System.out.println("\nBarmans :");
+                for (Personnel iPersonnel : getListeDesEmployees()) {
+                    if (iPersonnel instanceof Barman) { // On verifie si le personnel est un serveur
+                        System.out.println(" " + iPersonnel.getPrenom() + " " + iPersonnel.getNom());
+                    }
+                }
+                System.out.println();
                 break;
-            case 2: // Ajouter serveur
-                ajouterBarman(scanner);
-                break;
-            case 3: // Ajouter serveur
-                ajouterCuisinier(scanner);
-                break;
-            case 4: // Distribution des tables
+
+            case 2: // Distribution des tables
                 if (getListeDesEmployees().isEmpty()) {
                     System.err.println("Il n'y a pas de serveurs embauchés.");
                     System.out.println("0- Pour continuer");
@@ -530,56 +544,24 @@ public class Application {
                 scanner.nextInt();
                 mainMenu(scanner);
                 break;
+            
+
+            case 3: // Ajouter serveur
+                ajouterServeur(scanner);
+                break;
+
+            case 4: // Ajouter cuisinier
+                ajouterCuisinier(scanner);
+                break;
+
+            case 5: // Ajouter barman
+                ajouterBarman(scanner);
+                break;
 
             default:
                 startApp();
                 break;
         }
-
-    }
-
-    private void ajouterBarman(Scanner scanner) {
-        System.out.println("Entrez votre nom");
-        while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre nom");
-            scanner.next(); // Consommer la saisie incorrecte
-        }
-        String nom = scanner.next();
-        // Consommer la fin de la ligne pour éviter les problèmes de décalage
-        scanner.nextLine();
-        System.out.println("Entrez votre prénom");
-        while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre prénom");
-            scanner.next(); // Consommer la saisie incorrecte
-        }
-        String prenom = scanner.next();
-        // Consommer la fin de la ligne pour éviter les problèmes de décalage
-        scanner.nextLine();
-
-        Barman newServeur = new Barman(nom, prenom);
-        ajouterEmploye(newServeur);
-    }
-
-    private void ajouterCuisinier(Scanner scanner) {
-        System.out.println("Entrez votre nom");
-        while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre nom");
-            scanner.next(); // Consommer la saisie incorrecte
-        }
-        String nom = scanner.next();
-        // Consommer la fin de la ligne pour éviter les problèmes de décalage
-        scanner.nextLine();
-        System.out.println("Entrez votre prénom");
-        while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre prénom");
-            scanner.next(); // Consommer la saisie incorrecte
-        }
-        String prenom = scanner.next();
-        // Consommer la fin de la ligne pour éviter les problèmes de décalage
-        scanner.nextLine();
-
-        Cuisinier newServeur = new Cuisinier(nom, prenom);
-        ajouterEmploye(newServeur);
     }
 
     private void ajouterServeur(Scanner scanner) {
@@ -602,6 +584,50 @@ public class Application {
 
         Serveur newServeur = new Serveur(nom, prenom);
         ajouterEmploye(newServeur);
+    }
+
+    private void ajouterCuisinier(Scanner scanner) {
+        System.out.println("Entrez votre nom");
+        while (!scanner.hasNext()) {
+            System.err.println("Erreur : Veuillez entrer votre nom");
+            scanner.next(); // Consommer la saisie incorrecte
+        }
+        String nom = scanner.next();
+        // Consommer la fin de la ligne pour éviter les problèmes de décalage
+        scanner.nextLine();
+        System.out.println("Entrez votre prénom");
+        while (!scanner.hasNext()) {
+            System.err.println("Erreur : Veuillez entrer votre prénom");
+            scanner.next(); // Consommer la saisie incorrecte
+        }
+        String prenom = scanner.next();
+        // Consommer la fin de la ligne pour éviter les problèmes de décalage
+        scanner.nextLine();
+
+        Cuisinier newCuisinier = new Cuisinier(nom, prenom);
+        ajouterEmploye(newCuisinier);
+    }
+
+    private void ajouterBarman(Scanner scanner) {
+        System.out.println("Entrez votre nom");
+        while (!scanner.hasNext()) {
+            System.err.println("Erreur : Veuillez entrer votre nom");
+            scanner.next(); // Consommer la saisie incorrecte
+        }
+        String nom = scanner.next();
+        // Consommer la fin de la ligne pour éviter les problèmes de décalage
+        scanner.nextLine();
+        System.out.println("Entrez votre prénom");
+        while (!scanner.hasNext()) {
+            System.err.println("Erreur : Veuillez entrer votre prénom");
+            scanner.next(); // Consommer la saisie incorrecte
+        }
+        String prenom = scanner.next();
+        // Consommer la fin de la ligne pour éviter les problèmes de décalage
+        scanner.nextLine();
+
+        Barman newBarman = new Barman(nom, prenom);
+        ajouterEmploye(newBarman);
     }
 
     public void affichageStock(Scanner scanner) {
@@ -686,10 +712,11 @@ public class Application {
     private void displayGestionPersonnelMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         System.out.println("0- Retour");
-        System.out.println("1- Ajouter serveur");
-        System.out.println("2- Ajouter barman");
-        System.out.println("3- Ajouter cuisinier");
-        System.out.println("4- Distribution des tables");
+        System.out.println("1- Affichage liste employés");
+        System.out.println("2- Distribution des tables");
+        System.out.println("3- Ajouter serveur");
+        System.out.println("4- Ajouter cuisinier");
+        System.out.println("5- Ajouter barman");
     }
 
 }
