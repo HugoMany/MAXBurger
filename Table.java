@@ -16,7 +16,7 @@ public class Table {
 	public int getNbClientMax() { return this.nbClientMax; }
 
 	public void incrNombreDeCommandesTable() { this.nombreDeCommandesTable++; }
-	public void decrNombreDeCommandesTable() { this.nombreDeCommandesTable--; }
+	//public void decrNombreDeCommandesTable() { this.nombreDeCommandesTable--; }
 	public void setTableOccupee(boolean isOccupee) { this.tableOccupee = isOccupee; }
 
 	public Table(int numeroTable, int nbClientMax) {
@@ -24,35 +24,35 @@ public class Table {
 		this.nbClientMax = nbClientMax;
 	}
 
-	public void ajouterCommande(ArrayList<Plat> listePlats, ArrayList<Boisson> listeBoissons) {
-		incrNombreDeCommandesTable();
-		Commande commande = new Commande(getNombreDeCommandesTable());
-		// On ajoute tout les plats à la liste des plats de la commande
-		for (int platN = 0; platN < listePlats.size(); platN++) {
-			commande.ajoutPlatALaCommande(listePlats.get(platN));
-		}
-		// On ajoute toutes les boissons à la liste des boissons de la commande
-		for (int boissonN = 0; boissonN < listeBoissons.size(); boissonN++) {
-			commande.ajoutBoissonALaCommande(listeBoissons.get(boissonN));
-		}
-		this.tableauDeCommandes.add(commande);
-	}
+	// public void ajouterCommande(ArrayList<Plat> listePlats, ArrayList<Boisson> listeBoissons) {
+	// 	incrNombreDeCommandesTable();
+	// 	Commande commande = new Commande(getNombreDeCommandesTable());
+	// 	// On ajoute tout les plats à la liste des plats de la commande
+	// 	for (int platN = 0; platN < listePlats.size(); platN++) {
+	// 		commande.ajoutPlatALaCommande(listePlats.get(platN));
+	// 	}
+	// 	// On ajoute toutes les boissons à la liste des boissons de la commande
+	// 	for (int boissonN = 0; boissonN < listeBoissons.size(); boissonN++) {
+	// 		commande.ajoutBoissonALaCommande(listeBoissons.get(boissonN));
+	// 	}
+	// 	this.tableauDeCommandes.add(commande);
+	// }
 
-	public void ajouterPlatsALaCommande(ArrayList<Plat> listePlats, int numeroDeCommande) {
-		for (int platN = 0; platN < listePlats.size(); platN++) {
-			tableauDeCommandes.get(numeroDeCommande).ajoutPlatALaCommande(listePlats.get(platN));
-		}
-	}
+	// public void ajouterPlatsALaCommande(ArrayList<Plat> listePlats, int numeroDeCommande) {
+	// 	for (int platN = 0; platN < listePlats.size(); platN++) {
+	// 		tableauDeCommandes.get(numeroDeCommande).ajoutPlatALaCommande(listePlats.get(platN));
+	// 	}
+	// }
 
-	public void ajouterBoissonALaCommande(ArrayList<Boisson> listeBoissons, int numeroDeCommande) {
-		for (int boissonN = 0; boissonN < listeBoissons.size(); boissonN++) {
-			tableauDeCommandes.get(numeroDeCommande).ajoutBoissonALaCommande(listeBoissons.get(boissonN));
-		}
-	}
+	// public void ajouterBoissonALaCommande(ArrayList<Boisson> listeBoissons, int numeroDeCommande) {
+	// 	for (int boissonN = 0; boissonN < listeBoissons.size(); boissonN++) {
+	// 		tableauDeCommandes.get(numeroDeCommande).ajoutBoissonALaCommande(listeBoissons.get(boissonN));
+	// 	}
+	// }
 
-	public void annulerCommande(int numeroDeCommande) {
-		this.tableauDeCommandes.remove(numeroDeCommande);
-		decrNombreDeCommandesTable();
-	}
+	// public void annulerCommande(int numeroDeCommande) {
+	// 	this.tableauDeCommandes.remove(numeroDeCommande);
+	// 	decrNombreDeCommandesTable();
+	// }
 
 }
