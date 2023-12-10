@@ -90,6 +90,8 @@ public class Application {
                 affichageStock(scanner);
             case 7:
                 nextDay(scanner);
+            case 8:
+                addition(scanner);
             default:
                 startApp();
                 break;
@@ -597,6 +599,7 @@ public class Application {
         System.out.println("5- Ecran gestion personnel");
         System.out.println("6- Afficher stock");
         System.out.println("7- Prochaine journée");
+        System.out.println("8- Demande d'addition");
         System.out.println("0- Exit");
     }
 
