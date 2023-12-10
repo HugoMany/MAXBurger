@@ -559,6 +559,22 @@ public class Application {
         scanner.nextInt();
 
     }
+
+    public void addition(Scanner scanner) {
+        // Faire scanner pour numTable, numCommande
+        // Elles sont ici initialisées manuellement
+        // int numTable = 1;
+        // int numCommande = 1;
+        System.out.println("Entrez le numéro de table");
+        int numTable = scanner.nextInt();
+        System.out.println("Entrez le numéro de commande");
+        int numCommande = scanner.nextInt();
+        Commande commandeDemandee = listeDesJournée.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
+        Addition additionAEditer = new Addition();
+        additionAEditer.newAddition(commandeDemandee);
+        additionAEditer.enregistrementFichier();
+        additionAEditer.editionTicket();
+    }
     
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
