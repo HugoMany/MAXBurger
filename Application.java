@@ -529,6 +529,7 @@ public class Application {
         // int choixEcran = scanner.nextInt();
         // switch (choixEcran) {
         //     case 1:
+                System.out.println("");
                 ArrayList<Table> allTables = this.listeDesJournee.get(currentDay).listeDesTables;
                 int indexPrint = 0;
                 for (int i = 0; i < allTables.size(); i++) {
@@ -541,7 +542,7 @@ public class Application {
 
                     }
                 }
-                System.out.println("0- Pour continuer \n 1à99- Pour Valider");
+                System.out.println("\n1 à 99- Pour Valider \n0- Pour retourner au menu");
                 int choixCommandePrete = scanner.nextInt();
                 if (choixCommandePrete == 0) {
                     mainMenu(scanner);
