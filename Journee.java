@@ -20,7 +20,7 @@ public class Journee {
             if (listeDesTables.get(numTable).isTableOccupee() == false && listeDesTables.get(numTable).getNbClientMax() == nbClient && tableIdeale == false) {
             	this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
                 tableIdeale = true;
-                System.out.println("Aller à la table n°" + numTable);
+                System.out.println("Aller à la table n°" + numTable+1);
                 return numTable;
             }
         }
