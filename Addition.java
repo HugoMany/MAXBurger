@@ -41,7 +41,7 @@ public class Addition {
         this.somme = montant;
     }
 
-    // On récupère tous les éléments commandés pour ensuite pouvoir calculer le montant à payer
+    // Récupère tous les éléments commandés pour ensuite pouvoir calculer le montant total à payer
     void calculAddition() {
         if (listeDesPlats == null || listeDesPlats.size() == 0) {}
         else {
@@ -57,7 +57,7 @@ public class Addition {
         }
     }
 
-    // On récupère les éléments commandéss de la classe Commande entrée en paramètre et on lance le calcul de l'addition
+    // Récupère les éléments commandés de la classe Commande entrée en paramètre, récupère le numéro de la table et le numéro de commande et lance le calcul de l'addition
     public void newAddition(Commande maCommande) {
         this.idCommande = maCommande.numeroDeCommande;
         this.numCommande = idCommande % 100;
@@ -67,7 +67,7 @@ public class Addition {
         calculAddition();
     }
 
-    // On prépare une liste textuelle des plats
+    // Prépare une liste textuelle des plats
     public String listeDesPlatsTicket() {
         String liste = "";
         if (this.listeDesPlats == null || listeDesPlats.size() == 0) { return "Aucun plat\n";}
@@ -79,7 +79,7 @@ public class Addition {
         }
     }
 
-    // On prépare une liste textuelle des boissons
+    // Prépare une liste textuelle des boissons
     public String listeDesBoissonsTicket() {
         String liste = "";
         if (this.listeDesBoissons == null || listeDesBoissons.size() == 0) { return "Aucune boisson\n";}
@@ -96,38 +96,37 @@ public class Addition {
 
     
     // On crée un fichier au nom voulu
-    public void enregistrementFichier(int numJour) {
-        String cheminDuFichier = "Jour" + numJour + "\\Ticket Table n" + numTable;
-        // Créez gn qbdet File pour le fichSgc
-        File fichier = new File(cheminDuFichier);
-        try {
-            // méthode createNewFi1e() pour créer le fichier
-            boolean fichierCree = fichier.createNewFile();
-            if (fichierCree) {
-                System.out.println("Enregistrement du ticket effectué avec succès.");}
-            else {
-                System.out.println("Erreur, table déjà existante.");
-            }
-        } catch (IOException e) {
-            System.err.println("Une erreur s'est produite lors de l'enregistrement du ticket." + e.getMessage());
-        }
-    }
+    // public void enregistrementFichier(int numJour) {
+    //     String cheminDuFichier = "Jour" + numJour + "\\Ticket Table n" + numTable;
+    //     // Créez gn qbdet File pour le fichSgc
+    //     File fichier = new File(cheminDuFichier);
+    //     try {
+    //         // méthode createNewFi1e() pour créer le fichier
+    //         boolean fichierCree = fichier.createNewFile();
+    //         if (fichierCree) {
+    //             System.out.println("Enregistrement du ticket effectué avec succès.");}
+    //         else {
+    //             System.out.println("Erreur, table déjà existante.");
+    //         }
+    //     } catch (IOException e) {
+    //         System.err.println("Une erreur s'est produite lors de l'enregistrement du ticket." + e.getMessage());
+    //     }
+    // }
 
     // On teste ici son ouverture
-    public void testOuverture() {
-        Path fichier = Path.of("monFichier.txt");
-        boolean estAccessible = Files.isRegularFile(fichier) && Files.isReadable(fichier) && Files.isExecutable(fichier);
-        System.out.println(estAccessible);
-    }
+    // public void testOuverture() {
+    //     Path fichier = Path.of("monFichier.txt");
+    //     boolean estAccessible = Files.isRegularFile(fichier) && Files.isReadable(fichier) && Files.isExecutable(fichier);
+    //     System.out.println(estAccessible);
+    // }
 
     // A faire ! Permet de stocker un bref récap de la commande pour éditer un ticket final de la journée
-    public void editionTicketResume() {
+    // public void editionTicketResume() {
         
-    }
+    // }
 
     // On enregistre toute la commande dans un fichier texte
     public void editionTicket(int numJour) {
-        // try-with-resources
         Charset charset = Charset.forName ("windows-1252");
         String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable + " Commande n" + numCommande;
         String texte = "# Ticket Table n" + numTable + " - Commande n" + numCommande + "\n\n\n";
@@ -136,16 +135,11 @@ public class Addition {
         texte += listeDesBoissonsTicket();
         texte += "\n\nA payer : " + somme;
 
-        if (somme >= 2) {
-            texte += " euros";
-        }
-        else {
-            texte += " euro";
-        }
+        if (somme >= 2) { texte += " euros"; }
+        else { texte += " euro"; }
 
 
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), charset)) {
-
             writer.write(texte);
         }
         catch (IOException x) {
@@ -173,37 +167,7 @@ public class Addition {
     }
 
 
-    // public void testEdition2(int numJour, int numTable) {
-    //     //Sous Windows
-    //     File file = new File("Jour" + numJour + "\\");
-
-    //     if (file.exists()) {
-    //         System.out.println("Le dossier existe déjà : " + file.getAbsolutePath());
-    //     } else {
-    //         if (file.mkdir()) {
-    //             System.out.println("Ajout du dossier : " + file.getAbsolutePath());
-    //         } else {
-    //             System.out.println("Echec sur le dossier : " + file.getAbsolutePath());
-    //         }
-    //     }
-
-
-    //     // String cheminDuFichier = "/Jour n" + numJour + "/Ticket Table n" + numTable;
-    //     String cheminDuFichier = "bb\\bb.txt";
-    //     // Créez gn qbdet File pour le fichSgc
-    //     File fichier = new File(cheminDuFichier);
-    //     try {
-    //         // méthode createNewFi1e() pour créer le fichier
-    //         boolean fichierCree = fichier.createNewFile();
-    //         if (fichierCree) {
-    //             System.out.println("Enregistrement du ticket effectué avec succès.");}
-    //         else {
-    //             System.out.println("Erreur, table déjà existante.");
-    //         }
-    //     } catch (IOException e) {
-    //         System.err.println("Une erreur s'est produite lors de l'enregistrement du ticket." + e.getMessage());
-    //     }
-    // }
+    
 
     
     public void ticketFichierDeA_Z(int numJournee) {
