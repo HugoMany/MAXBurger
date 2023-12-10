@@ -161,6 +161,10 @@ public class Application {
             numeroTable = journee.conduireATable(nbClients);
             if (numeroTable != 0) {
                 getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numeroTable).setTableOccupee(true); // On dit que cette table est desormais occupée
+                getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numeroTable).incrNombreDeCommandesTable(); // On augmente le nombre de commande sur cette table
+            }
+            else {
+                System.out.println("Il n'y a pas de table disponible.");
             }
 
             if (type == 0) { // Si c'est des plats
@@ -235,7 +239,6 @@ public class Application {
                 for (int platCode : listePlatCommande) {
                     System.out.println(carteDuRestorant.cartePlat[platCode - 1].nom);
                     newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[platCode - 1]);
-                    getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).incrNombreDeCommandesTable();
                     commandeEnd = true;
                 }
                 System.out.println("Le numéro de commande est le n°" + numeroDeCommande);

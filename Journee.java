@@ -21,15 +21,15 @@ public class Journee {
         for (int numTable = 0; numTable < listeDesTables.size(); numTable++) {
             // Si on trouve une table non occupe et avec le nombre exact de place necessaire
             if (listeDesTables.get(numTable).isTableOccupee() == false && listeDesTables.get(numTable).getNbClientMax() == nbClient && tableIdeale == false) {
-            	//this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupée
+            	this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupée
                 tableIdeale = true;
                 numTable++;
                 System.out.println("\nAller à la table n°" + numTable);
 
                 //TEST QUI AFFICHE LA LISTE DES TABLES AVEC LEURS NOMBRE DE PLACE MAXIMUM
-                // for (Table tabli : getListeDesTables()) {
-                //     System.out.println("table n°" + tabli.getNumeroTable() + " | " + tabli.getNbClientMax() + " | " + tabli.isTableOccupee());
-                // }
+                //  for (Table tabli : getListeDesTables()) {
+                //      System.out.println("table n°" + tabli.getNumeroTable() + " | " + tabli.getNbClientMax() + " | " + tabli.isTableOccupee());
+                //  }
 
                 return numTable;
             }
@@ -39,7 +39,7 @@ public class Journee {
             for (int numTable = 0; numTable < listeDesTables.size(); numTable++) {
                 // Si on trouve une table non occupe et avec 2 places au max en trop
                 if (listeDesTables.get(numTable).isTableOccupee() == false && listeDesTables.get(numTable).getNbClientMax() <= nbClient + 2 && tableIdeale == false) {
-            	    //this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
+            	    this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
                     tableIdeale = true;
                     numTable++;
                     System.out.println("Aller à la table n°" + numTable);
@@ -58,7 +58,7 @@ public class Journee {
             for (int numTable = 0; numTable < listeDesTables.size(); numTable++) {
                 // Si on trouve une table non occupe et avec 4 places au max en trop
                 if (listeDesTables.get(numTable).isTableOccupee() == false && listeDesTables.get(numTable).getNbClientMax() <= nbClient + 4 && tableIdeale == false) {
-            	    //this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
+            	    this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
                     tableIdeale = true;
                     numTable++;
                     System.out.println("Aller à la table n°" + numTable);
@@ -77,7 +77,7 @@ public class Journee {
             for (int numTable = 0; numTable < listeDesTables.size(); numTable++) {
                 // Si on trouve une table non occupe et avec 6 places au max en trop
                 if (listeDesTables.get(numTable).isTableOccupee() == false && listeDesTables.get(numTable).getNbClientMax() <= nbClient + 6 && tableIdeale == false) {
-            	    //this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
+            	    this.listeDesTables.get(numTable).setTableOccupee(true); // On dit que cette table est desormais occupe
                     tableIdeale = true;
                     numTable++;
                     System.out.println("Aller à la table n°" + numTable);
