@@ -15,6 +15,9 @@ public class main {
 		// hello.affichageMenuStatsTickets();
 		// hello.editionFactureJournaliere();
 
+		//Addition hello = new Addition();
+		//hello.testEdition2(2,3);
+
 
 	}
 

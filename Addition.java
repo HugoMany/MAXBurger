@@ -8,8 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+
+
 
 
 public class Addition {
@@ -83,10 +86,13 @@ public class Addition {
         }
     }
 
+
+    
+
     
     // On crée un fichier au nom voulu
-    public void enregistrementFichier() {
-        String cheminDuFichier = "Ticket Table n" + numTable;
+    public void enregistrementFichier(int numJour) {
+        String cheminDuFichier = "Jour n" + numJour + "/Ticket Table n" + numTable;
         // Créez gn qbdet File pour le fichSgc
         File fichier = new File(cheminDuFichier);
         try {
@@ -144,8 +150,51 @@ public class Addition {
 
     }
 
-    
 
+    public void testEdition(int numJour, int numTable) {
+        // try-with-resources
+
+        Charset charset = Charset.forName ("windows-1252");
+        String nomFichier = "/Jour n" + numJour + "/Ticket Table n" + numTable;
+        String texte = "# Ticket Table n" + numTable + "\n\n\n";
+
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), charset)) {
+
+            writer.write(texte);
+            System.out.println("toutBon");
+        }
+        catch (IOException x) {
+            System.err.format("IOException : %s%n", x);
+        }
+
+    }
+
+
+    public void testEdition2(int numJour, int numTable) {
+        
+
+
+        // String cheminDuFichier = "/Jour n" + numJour + "/Ticket Table n" + numTable;
+        String cheminDuFichier = "aa\\bb.txt";
+        // Créez gn qbdet File pour le fichSgc
+        File fichier = new File(cheminDuFichier);
+        try {
+            // méthode createNewFi1e() pour créer le fichier
+            boolean fichierCree = fichier.createNewFile();
+            if (fichierCree) {
+                System.out.println("Enregistrement du ticket effectué avec succès.");}
+            else {
+                System.out.println("Erreur, table déjà existante.");
+            }
+        } catch (IOException e) {
+            System.err.println("Une erreur s'est produite lors de l'enregistrement du ticket." + e.getMessage());
+        }
+    }
+
+    
+    public void ticketFichierDeA_Z(int numJournee) {
+
+    }
 
 
 
