@@ -86,6 +86,9 @@ public class Application {
                 break;
             case 5:
                 ecranGestionPersonnel(scanner);
+                System.out.println("0- Pour continuer");
+                scanner.nextInt();
+                mainMenu(scanner);
                 break;
             case 6:
                 affichageStock(scanner);
