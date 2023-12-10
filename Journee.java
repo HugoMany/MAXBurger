@@ -5,9 +5,12 @@ public class Journee {
     protected ArrayList<Table> listeDesTables = new ArrayList<Table>();
     public int hOuverture;
     public int hFermeture;
+    
+    protected Facture factureJournee;
 
     public ArrayList<Table> getListeDesTables() { return this.listeDesTables; }
 
+    
 
     public Journee(int hOuverture,int hFermeture){
         this.hFermeture=hFermeture;

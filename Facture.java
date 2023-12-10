@@ -14,58 +14,24 @@ public class Facture {
 
 
 	protected Double montantTotalJournee;
-	protected ArrayList<TicketResume> tickets = new ArrayList<TicketResume>();
+	protected ArrayList<TicketResume> listeTickets = new ArrayList<TicketResume>();
 
 
-	public Facture() {
-		this.montantTotalJournee = 0.0;
-	}
-
-
-	// public void hello() {
-	// 	getListeDesJournée();
-	// }
-
-
-
-
-	public void lectureFichier(){
-    try {
-     	// Le fichier d'entrée
-      	File file = new File("file.txt");    
-      	// Créer l'objet File Reader
-    	FileReader fr = new FileReader(file);  
-      	// Créer l'objet BufferedReader        
-      	BufferedReader br = new BufferedReader(fr);  
-      	StringBuffer sb = new StringBuffer();    
-      	String line;
-		int compteur = 0;
-		Double montantTotal = 0.0;
-		int numTable = 0;
-      	while((line = br.readLine()) != null)
-      	{
-			// TicketResume ticketResume;
-
-			if (compteur == 0) {
-				numTable = Integer.parseInt(line);
-				compteur++;
-			}
-			else if (compteur == 1) {
-				montantTotal = Double.parseDouble(line);
-				montantTotalJournee += montantTotal;
-				compteur++;
-				compteur %= 2;
-				// ticketResume = new TicketResume(montantTotal, montantTotal);
-				tickets.add(new TicketResume(numTable, montantTotal));
-			}
-		}
-      	fr.close();    
+	public void setNouveauTicket(int numTable, int numCommande, Double montant) {
+        TicketResume newTicket = new TicketResume(numTable, numCommande, montant);
+        listeTickets.add(newTicket);
     }
-    catch(IOException e)
-    	{
-     		e.printStackTrace();
-    	}
-	}
+
+
+
+
+
+	
+
+
+
+
+	
 
 
 
@@ -98,9 +64,9 @@ public class Facture {
 	public void affichageMenuStatsTickets() {
 		System.out.println("### Facture journaliere ###\n");
 
-		for(int i = 0; i < tickets.size(); i++) {
-			System.out.println("Table numero " + tickets.get(i).numTable + "");
-			System.out.println(tickets.get(i).montantPaye + " euros\n");
+		for(int i = 0; i < listeTickets.size(); i++) {
+			System.out.println("Table numero " + listeTickets.get(i).numTable + "");
+			System.out.println(listeTickets.get(i).montantPaye + " euros\n");
 		}
 		System.out.print("\nTotal percu ce jour : " + montantTotalJournee);
 		if (montantTotalJournee >= 2) {
@@ -120,10 +86,10 @@ public class Facture {
         String nomFichier = "Facture journaliere";
         String texte = "# Facture journaliere\n\n\n";
 
-		System.out.println("####### Nb table dans ticket " + tickets.size());
-		for(int i = 0; i < tickets.size(); i++) {
-			texte += "Table numero " + tickets.get(i).numTable + "\n";
-			texte += tickets.get(i).montantPaye + " euros\n\n";
+		System.out.println("####### Nb table dans ticket " + listeTickets.size());
+		for(int i = 0; i < listeTickets.size(); i++) {
+			texte += "Table numero " + listeTickets.get(i).numTable + "\n";
+			texte += listeTickets.get(i).montantPaye + " euros\n\n";
 		}
         
         
