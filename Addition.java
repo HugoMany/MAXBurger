@@ -130,7 +130,7 @@ public class Addition {
         // try-with-resources
         Charset charset = Charset.forName ("windows-1252");
         String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable + " Commande n" + numCommande;
-        String texte = "# Ticket Table n" + numTable + "\n\n\n";
+        String texte = "# Ticket Table n" + numTable + " - Commande n" + numCommande + "\n\n\n";
 
         texte += listeDesPlatsTicket();
         texte += listeDesBoissonsTicket();
