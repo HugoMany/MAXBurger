@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -643,6 +644,7 @@ public class Application {
         this.currentDay++;
         this.tableDuJourDejaDistribué = false;
         addAJournee(new Journee(H_FERMETURE, H_OUVERTURE));
+        creerDossierDuJour();
         System.out.println("Journée suivante!");
         System.out.println("\n0- Pour continuer");
         scanner.nextInt();
@@ -662,12 +664,26 @@ public class Application {
         Commande commandeDemandee = listeDesJournee.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
         Addition additionAEditer = new Addition();
         additionAEditer.newAddition(commandeDemandee);
-        additionAEditer.enregistrementFichier();
+        additionAEditer.enregistrementFichier(currentDay);
         additionAEditer.editionTicket();
     }
 
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
+    }
+
+    public void creerDossierDuJour() {
+        File file = new File("Jour" + getCurrentDay() + "\\");
+
+        if (file.exists()) {
+            System.out.println("Le dossier existe déjà : " + file.getAbsolutePath());
+        } else {
+            if (file.mkdir()) {
+                System.out.println("Ajout du dossier jour : " + file.getAbsolutePath() + " avec succès");
+            } else {
+                System.out.println("Echec sur le dossier : " + file.getAbsolutePath());
+            }
+        }
     }
 
     // Méthodes pour afficher les différents menus

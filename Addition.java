@@ -172,7 +172,7 @@ public class Addition {
 
     public void testEdition2(int numJour, int numTable) {
         //Sous Windows
-        File file = new File("bb\\");
+        File file = new File("Jour" + numJour + "\\");
 
         if (file.exists()) {
             System.out.println("Le dossier existe déjà : " + file.getAbsolutePath());
