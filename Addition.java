@@ -147,7 +147,6 @@ public class Addition {
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), charset)) {
 
             writer.write(texte);
-            System.out.println("toutBon");
         }
         catch (IOException x) {
             System.err.format("IOException : %s%n", x);
