@@ -92,7 +92,7 @@ public class Addition {
     
     // On crée un fichier au nom voulu
     public void enregistrementFichier(int numJour) {
-        String cheminDuFichier = "Jour n" + numJour + "/Ticket Table n" + numTable;
+        String cheminDuFichier = "Jour n" + numJour + "\\Ticket Table n" + numTable;
         // Créez gn qbdet File pour le fichSgc
         File fichier = new File(cheminDuFichier);
         try {
@@ -121,10 +121,10 @@ public class Addition {
     }
 
     // On enregistre toute la commande dans un fichier texte
-    public void editionTicket() {
+    public void editionTicket(int numJour) {
         // try-with-resources
         Charset charset = Charset.forName ("windows-1252");
-        String nomFichier = "Ticket Table n" + numTable;
+        String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable;
         String texte = "# Ticket Table n" + numTable + "\n\n\n";
 
         texte += listeDesPlatsTicket();
@@ -155,7 +155,7 @@ public class Addition {
         // try-with-resources
 
         Charset charset = Charset.forName ("windows-1252");
-        String nomFichier = "/Jour n" + numJour + "/Ticket Table n" + numTable;
+        String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable;
         String texte = "# Ticket Table n" + numTable + "\n\n\n";
 
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), charset)) {
@@ -170,37 +170,37 @@ public class Addition {
     }
 
 
-    public void testEdition2(int numJour, int numTable) {
-        //Sous Windows
-        File file = new File("Jour" + numJour + "\\");
+    // public void testEdition2(int numJour, int numTable) {
+    //     //Sous Windows
+    //     File file = new File("Jour" + numJour + "\\");
 
-        if (file.exists()) {
-            System.out.println("Le dossier existe déjà : " + file.getAbsolutePath());
-        } else {
-            if (file.mkdir()) {
-                System.out.println("Ajout du dossier : " + file.getAbsolutePath());
-            } else {
-                System.out.println("Echec sur le dossier : " + file.getAbsolutePath());
-            }
-        }
+    //     if (file.exists()) {
+    //         System.out.println("Le dossier existe déjà : " + file.getAbsolutePath());
+    //     } else {
+    //         if (file.mkdir()) {
+    //             System.out.println("Ajout du dossier : " + file.getAbsolutePath());
+    //         } else {
+    //             System.out.println("Echec sur le dossier : " + file.getAbsolutePath());
+    //         }
+    //     }
 
 
-        // String cheminDuFichier = "/Jour n" + numJour + "/Ticket Table n" + numTable;
-        String cheminDuFichier = "bb\\bb.txt";
-        // Créez gn qbdet File pour le fichSgc
-        File fichier = new File(cheminDuFichier);
-        try {
-            // méthode createNewFi1e() pour créer le fichier
-            boolean fichierCree = fichier.createNewFile();
-            if (fichierCree) {
-                System.out.println("Enregistrement du ticket effectué avec succès.");}
-            else {
-                System.out.println("Erreur, table déjà existante.");
-            }
-        } catch (IOException e) {
-            System.err.println("Une erreur s'est produite lors de l'enregistrement du ticket." + e.getMessage());
-        }
-    }
+    //     // String cheminDuFichier = "/Jour n" + numJour + "/Ticket Table n" + numTable;
+    //     String cheminDuFichier = "bb\\bb.txt";
+    //     // Créez gn qbdet File pour le fichSgc
+    //     File fichier = new File(cheminDuFichier);
+    //     try {
+    //         // méthode createNewFi1e() pour créer le fichier
+    //         boolean fichierCree = fichier.createNewFile();
+    //         if (fichierCree) {
+    //             System.out.println("Enregistrement du ticket effectué avec succès.");}
+    //         else {
+    //             System.out.println("Erreur, table déjà existante.");
+    //         }
+    //     } catch (IOException e) {
+    //         System.err.println("Une erreur s'est produite lors de l'enregistrement du ticket." + e.getMessage());
+    //     }
+    // }
 
     
     public void ticketFichierDeA_Z(int numJournee) {

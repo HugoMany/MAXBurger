@@ -665,7 +665,7 @@ public class Application {
         Addition additionAEditer = new Addition();
         additionAEditer.newAddition(commandeDemandee);
         additionAEditer.enregistrementFichier(currentDay);
-        additionAEditer.editionTicket();
+        additionAEditer.editionTicket(currentDay);
     }
 
     public int getRandomNumber(int min, int max) {
