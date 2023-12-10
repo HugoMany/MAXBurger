@@ -28,20 +28,19 @@ public class Facture {
 
 
 	public void affichageMenuStatsTickets() {
-		System.out.println("### Facture journaliere ###\n");
 
-		String texte = "# Facture journaliere\n\n\n";
+		String texte = "\n\n# Statistiques journée\n\n";
 
-		System.out.println("####### Nb tables servies aujourd'hui " + listeTickets.size());
+		texte += "Nb tables servies aujourd'hui " + listeTickets.size() + "\n\n";
 		
 		for(int i = 0; i < listeTickets.size(); i++) {
-			texte += "Table numero " + listeTickets.get(i).numTable + " - Commande numéro " + listeTickets.get(i).numCommande + "\n";
-			texte += listeTickets.get(i).montantPaye + " euros\n\n";
+			texte += "- Table numero " + listeTickets.get(i).numTable + " - Commande numéro " + listeTickets.get(i).numCommande + "\n\t=> ";
+			texte += listeTickets.get(i).montantPaye + " euros\n";
 			montantTotalJournee += listeTickets.get(i).montantPaye;
 		}
         
         
-        texte += "\n\nTotal percu ce jour : " + montantTotalJournee;
+        texte += "\nTotal percu ce jour : " + montantTotalJournee;
 
         if (montantTotalJournee >= 2) {
             texte += " euros";
@@ -52,17 +51,18 @@ public class Facture {
 
 		System.out.print(texte);
 
-		System.out.println("\n###########\n### FIN ###\n###########\n");
+		System.out.println("\n");
 	}
 
 
 	public void editionFichier(int numJour) {
         Charset charset = Charset.forName ("windows-1252");
-        String nomFichier = "Jour" + numJour + "\\Facture journaliere";
-        String texte = "# Facture journaliere\n\n\n";
+        String nomFichier = "Jour" + numJour + "\\Facture journaliere" + nbFactureDemandee;
+		nbFactureDemandee++;
+        String texte = "# Statistiques journee\n\n";
 
 
-		texte += "####### Nb tables servies aujourd'hui " + listeTickets.size();
+		texte += "Nb tables servies aujourd'hui " + listeTickets.size() + "\n";
 		for(int i = 0; i < listeTickets.size(); i++) {
 			texte += "Table numero " + listeTickets.get(i).numTable + " - Commande numero " + listeTickets.get(i).numCommande + "\n";
 			texte += listeTickets.get(i).montantPaye + " euros\n\n";
