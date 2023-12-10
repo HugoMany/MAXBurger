@@ -472,7 +472,7 @@ public class Application {
                         System.out.println(" " + iPersonnel.getPrenom() + " " + iPersonnel.getNom());
                     }
                 }
-                System.out.println();
+                System.out.println(); // fais un retour a la ligne
                 break;
 
             case 2: // Distribution des tables
