@@ -198,7 +198,7 @@ public class Application {
          * Le numero de commande se divise en deux parties, le début correspond au numéro de la table et la fin correspond à la nième commande sur cette table
          * Par exemple, si le numéro de commande est 1018, il faut lire séparement 10 et 18 ce qui indique qu'il s'agit de la 18ème commande sur la table 10
          * Pour accéder au numéro de la table à partir du numéro de commande on divise par 100
-         * Pour accéder au numéro de la commande en elle même on fait un modulo 100
+         * Pour savoir combien de commande on a fait sur la table on fait un modulo 100
          */
         int numeroDeCommande = numTable * 100 + getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getNombreDeCommandesTable();
 
@@ -229,6 +229,7 @@ public class Application {
                     newCommande.ajoutPlatALaCommande(carteDuRestorant.cartePlat[platCode - 1]);
                     commandeEnd = true;
                 }
+                System.out.println("Le numéro de commande est le n°" + numeroDeCommande);
                 commandeEnd = true;
             }
         }
