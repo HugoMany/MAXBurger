@@ -8,6 +8,8 @@ public class Application {
     public static final int NOMBRE_TABLE = 15;
     public static final int NOMBRE_BOISSON_CARTE = 5;
     public static final int NOMBRE_PLAT_CARTE = 11;
+    public static final int H_OUVERTURE = 10;
+    public static final int H_FERMETURE = 10;
 
     //
     // Variables
@@ -57,7 +59,7 @@ public class Application {
     // Méthodes
     //
     public void startApp() {
-        addAJournee(new Journee());
+        addAJournee(new Journee(H_OUVERTURE, H_FERMETURE));
         try (Scanner scanner = new Scanner(System.in)) {
             mainMenu(scanner);
         }
@@ -86,6 +88,8 @@ public class Application {
                 ecranGestionPersonnel(scanner);
             case 6:
                 affichageStock(scanner);
+            case 7:
+                nextDay(scanner);
             default:
                 startApp();
                 break;
@@ -547,6 +551,15 @@ public class Application {
         mainMenu(scanner);
     }
 
+    private void nextDay(Scanner scanner) {
+        this.currentDay++;
+        addAJournee(new Journee(H_FERMETURE, H_OUVERTURE));
+        System.out.println("Journée suivante!");
+        System.out.println("\n0- Pour continuer");
+        scanner.nextInt();
+
+    }
+
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
     }
@@ -567,6 +580,7 @@ public class Application {
         System.out.println("4- Ecran Monitoring");
         System.out.println("5- Ecran Gestion Personnel");
         System.out.println("6- Afficher Stock");
+        System.out.println("7- Prochaine Journée");
         System.out.println("0- Exit");
     }
 

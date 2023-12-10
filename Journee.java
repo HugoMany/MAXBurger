@@ -8,6 +8,11 @@ public class Journee {
 
     public ArrayList<Table> getListeDesTables() { return this.listeDesTables; }
 
+
+    public Journee(int hOuverture,int hFermeture){
+        this.hFermeture=hFermeture;
+        this.hOuverture=hOuverture;
+    }
     public int conduireATable(int nbClient) {
         boolean tableIdeale = false; // On utilise ce boolean pour trouver la table la plus adapaté au nombre de clients
         for (int numTable = 0; numTable < listeDesTables.size(); numTable++) {
