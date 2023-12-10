@@ -6,7 +6,7 @@ public class Journee {
     public int hOuverture;
     public int hFermeture;
     
-    protected Facture factureJournee;
+    protected Facture factureJournee = new Facture();
 
     public ArrayList<Table> getListeDesTables() { return this.listeDesTables; }
 

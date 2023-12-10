@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class Facture {
 
-
-	protected Double montantTotalJournee;
+	protected Double montantTotalJournee = 0.0;
 	protected ArrayList<TicketResume> listeTickets = new ArrayList<TicketResume>();
+	protected int nbFactureDemandee = 1;
 
 
 	public void setNouveauTicket(int numTable, int numCommande, Double montant) {
@@ -22,74 +22,51 @@ public class Facture {
         listeTickets.add(newTicket);
     }
 
-
-
-
-
-	
-
-
-
-
-	
-
-
-
-
-	public void editionFactureJournaliere() {
-		enregistrementFichier();
-		editionFichier();
-
+	public void incrNbFactureDemandee() {
+		nbFactureDemandee++;
 	}
-
-
-	public void enregistrementFichier() {
-        String cheminDuFichier = "Facture journaliere";
-        // Créez gn qbdet File pour le fichSgc
-        File fichier = new File(cheminDuFichier);
-        try {
-            // méthode createNewFi1e() pour créer le fichier
-            boolean fichierCree = fichier.createNewFile();
-            if (fichierCree) {
-                System.out.println("Enregistrement du ticket effectué avec succès.");}
-            else {
-                System.out.println("Erreur, table déjà existante.");
-            }
-        } catch (IOException e) {
-            System.err.println("Une erreur s'est produite lors de l'enregistrement du ticket." + e.getMessage());
-        }
-    }
 
 
 	public void affichageMenuStatsTickets() {
 		System.out.println("### Facture journaliere ###\n");
 
+		String texte = "# Facture journaliere\n\n\n";
+
+		System.out.println("####### Nb tables servies aujourd'hui " + listeTickets.size());
+		
 		for(int i = 0; i < listeTickets.size(); i++) {
-			System.out.println("Table numero " + listeTickets.get(i).numTable + "");
-			System.out.println(listeTickets.get(i).montantPaye + " euros\n");
+			texte += "Table numero " + listeTickets.get(i).numTable + " - Commande numéro " + listeTickets.get(i).numCommande + "\n";
+			texte += listeTickets.get(i).montantPaye + " euros\n\n";
+			montantTotalJournee += listeTickets.get(i).montantPaye;
 		}
-		System.out.print("\nTotal percu ce jour : " + montantTotalJournee);
-		if (montantTotalJournee >= 2) {
-            System.out.println(" euros");
+        
+        
+        texte += "\n\nTotal percu ce jour : " + montantTotalJournee;
+
+        if (montantTotalJournee >= 2) {
+            texte += " euros";
         }
         else {
-            System.out.println(" euro");
+            texte += " euro";
         }
+
+		System.out.print(texte);
 
 		System.out.println("\n###########\n### FIN ###\n###########\n");
 	}
 
 
-	public void editionFichier() {
-        // try-with-resources
+	public void editionFichier(int numJour) {
         Charset charset = Charset.forName ("windows-1252");
-        String nomFichier = "Facture journaliere";
+        String nomFichier = "Jour" + numJour + "\\Facture journaliere";
         String texte = "# Facture journaliere\n\n\n";
 
-		System.out.println("####### Nb table dans ticket " + listeTickets.size());
+
+		texte += "####### Nb tables servies aujourd'hui " + listeTickets.size();
 		for(int i = 0; i < listeTickets.size(); i++) {
-			texte += "Table numero " + listeTickets.get(i).numTable + "\n";
+			texte += "Table numero " + listeTickets.get(i).numTable + " - Commande numero " + listeTickets.get(i).numCommande + "\n";
 			texte += listeTickets.get(i).montantPaye + " euros\n\n";
+			montantTotalJournee += listeTickets.get(i).montantPaye;
 		}
         
         
@@ -106,7 +83,7 @@ public class Facture {
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(nomFichier), charset)) {
 
             writer.write(texte);
-            System.out.println("toutBon");
+            System.out.println("Facture éditée avec succès");
         }
         catch (IOException x) {
             System.err.format("IOException : %s%n", x);

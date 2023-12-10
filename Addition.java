@@ -127,6 +127,7 @@ public class Addition {
 
     // On enregistre toute la commande dans un fichier texte
     public void editionTicket(int numJour) {
+        // try-with-resources
         Charset charset = Charset.forName ("windows-1252");
         String nomFichier = "Jour" + numJour + "\\Ticket Table n" + numTable + " Commande n" + numCommande;
         String texte = "# Ticket Table n" + numTable + " - Commande n" + numCommande + "\n\n\n";

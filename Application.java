@@ -588,9 +588,10 @@ public class Application {
 
     public void ecranMonitoring(Scanner scanner) {
         // Ajoutez le code pour l'écran de monitoring
-        Facture hello = new Facture();
-        hello.lectureFichier();
-        hello.affichageMenuStatsTickets();
+        //Facture hello = new Facture();
+        listeDesJournee.get(currentDay).factureJournee.editionFichier(currentDay);
+        listeDesJournee.get(currentDay).factureJournee.affichageMenuStatsTickets();
+        //hello.affichageMenuStatsTickets();
         System.out.println("0- Pour continuer");
         scanner.nextInt();
         mainMenu(scanner);
@@ -826,6 +827,9 @@ public class Application {
         additionAEditer.newAddition(commandeDemandee);
         //additionAEditer.enregistrementFichier(currentDay);
         additionAEditer.editionTicket(currentDay);
+
+        
+        listeDesJournee.get(currentDay).factureJournee.setNouveauTicket(additionAEditer.numTable, additionAEditer.numCommande, additionAEditer.somme);
 
         // On dit que cette table n'est plus occupée
         getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).setTableOccupee(false);
