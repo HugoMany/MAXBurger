@@ -676,7 +676,7 @@ public class Application {
         Commande commandeDemandee = listeDesJournee.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
         Addition additionAEditer = new Addition();
         additionAEditer.newAddition(commandeDemandee);
-        additionAEditer.enregistrementFichier(currentDay);
+        //additionAEditer.enregistrementFichier(currentDay);
         additionAEditer.editionTicket(currentDay);
     }
 
