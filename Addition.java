@@ -92,7 +92,7 @@ public class Addition {
     
     // On crée un fichier au nom voulu
     public void enregistrementFichier(int numJour) {
-        String cheminDuFichier = "Jour n" + numJour + "\\Ticket Table n" + numTable;
+        String cheminDuFichier = "Jour" + numJour + "\\Ticket Table n" + numTable;
         // Créez gn qbdet File pour le fichSgc
         File fichier = new File(cheminDuFichier);
         try {
