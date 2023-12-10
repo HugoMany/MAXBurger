@@ -90,6 +90,8 @@ public class Application {
                 affichageStock(scanner);
             case 7:
                 nextDay(scanner);
+            case 8:
+                addition();
             default:
                 startApp();
                 break;
@@ -560,6 +562,10 @@ public class Application {
 
     }
 
+    public void addition() {
+
+    }
+
     public int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min + 1)) + min);
     }
@@ -581,6 +587,7 @@ public class Application {
         System.out.println("5- Ecran Gestion Personnel");
         System.out.println("6- Afficher Stock");
         System.out.println("7- Prochaine Journée");
+        System.out.println("8- Addition");
         System.out.println("0- Exit");
     }
 
