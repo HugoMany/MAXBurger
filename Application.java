@@ -127,11 +127,7 @@ public class Application {
     }
 
     public void demandeNomEtNumeroTable(int type, Scanner scanner) {
-        String nom = "";
         int numeroTable = 0;
-
-        // System.out.println("Entrez le nom du client : ");
-        // nom = scanner.nextLine();
 
         // NOMBRE DE CLIENTS
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
@@ -181,15 +177,13 @@ public class Application {
 
         }
         if (type == 0) {
-            priseCommandePlat(nom, numeroTable, scanner);
+            priseCommandePlat(numeroTable, scanner);
         } else if (type == 1) {
-            priseCommandeBoisson(nom, numeroTable, scanner);
+            priseCommandeBoisson(numeroTable, scanner);
         }
     }
 
-    public void priseCommandePlat(String nomClient, int numTable, Scanner scanner) {
-        // A finir
-        nomClient = "many";
+    public void priseCommandePlat(int numTable, Scanner scanner) {
 
         carteDuRestorant.printCartePlat();
 
@@ -202,7 +196,7 @@ public class Application {
          */
         int numeroDeCommande = numTable * 100 + getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getNombreDeCommandesTable();
 
-        Commande newCommande = new Commande(nomClient, numeroDeCommande);
+        Commande newCommande = new Commande(numeroDeCommande);
         ArrayList<Integer> listePlatCommande = new ArrayList<>();
         boolean commandeEnd = false;
 
@@ -256,11 +250,9 @@ public class Application {
 
     }
 
-    public void priseCommandeBoisson(String nomClient, int numTable, Scanner scanner) {
-        // A finir
-        nomClient = "many";
+    public void priseCommandeBoisson(int numTable, Scanner scanner) {
 
-        Commande newCommande = new Commande(nomClient, numTable);
+        Commande newCommande = new Commande(numTable);
         ArrayList<Integer> listeBoissonCommande = new ArrayList<>();
         boolean commandeEnd = false;
         carteDuRestorant.printCarteBoisson();
@@ -313,7 +305,7 @@ public class Application {
     }
 
     public void ecranCuisine(Scanner scanner) {
-        displayCuisineMenu();
+        //displayCuisineMenu();
 
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
@@ -383,7 +375,7 @@ public class Application {
     }
 
     public void ecranBar(Scanner scanner) {
-        displayBarMenu();
+        //displayBarMenu();
 
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
@@ -578,17 +570,17 @@ public class Application {
     }
 
     private void ajouterServeur(Scanner scanner) {
-        System.out.println("Entrez votre nom");
+        System.out.println("Entrez le nom du nouveau serveur");
         while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre nom");
+            System.err.println("Erreur : Veuillez entrer le nom du nouveau serveur");
             scanner.next(); // Consommer la saisie incorrecte
         }
         String nom = scanner.next();
         // Consommer la fin de la ligne pour éviter les problèmes de décalage
         scanner.nextLine();
-        System.out.println("Entrez votre prénom");
+        System.out.println("Entrez le prénom du nouveau serveur");
         while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre prénom");
+            System.err.println("Erreur : Veuillez entrer le prénom du nouveau serveur");
             scanner.next(); // Consommer la saisie incorrecte
         }
         String prenom = scanner.next();
@@ -600,17 +592,17 @@ public class Application {
     }
 
     private void ajouterCuisinier(Scanner scanner) {
-        System.out.println("Entrez votre nom");
+        System.out.println("Entrez le nom du nouveau cuisinier");
         while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre nom");
+            System.err.println("Erreur : Veuillez entrer le nom du nouveau cuisinier");
             scanner.next(); // Consommer la saisie incorrecte
         }
         String nom = scanner.next();
         // Consommer la fin de la ligne pour éviter les problèmes de décalage
         scanner.nextLine();
-        System.out.println("Entrez votre prénom");
+        System.out.println("Entrez le prénom du nouveau cuisinier");
         while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre prénom");
+            System.err.println("Erreur : Veuillez entrer le prénom du nouveau cuisinier");
             scanner.next(); // Consommer la saisie incorrecte
         }
         String prenom = scanner.next();
@@ -622,17 +614,17 @@ public class Application {
     }
 
     private void ajouterBarman(Scanner scanner) {
-        System.out.println("Entrez votre nom");
+        System.out.println("Entrez le nom du nouveau barman");
         while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre nom");
+            System.err.println("Erreur : Veuillez entrer le nom du nouveau barman");
             scanner.next(); // Consommer la saisie incorrecte
         }
         String nom = scanner.next();
         // Consommer la fin de la ligne pour éviter les problèmes de décalage
         scanner.nextLine();
-        System.out.println("Entrez votre prénom");
+        System.out.println("Entrez le prénom du nouveau barman");
         while (!scanner.hasNext()) {
-            System.err.println("Erreur : Veuillez entrer votre prénom");
+            System.err.println("Erreur : Veuillez entrer le prénom du nouveau barman");
             scanner.next(); // Consommer la saisie incorrecte
         }
         String prenom = scanner.next();
@@ -729,17 +721,17 @@ public class Application {
         System.out.println("2- Menu des Boissons");
     }
 
-    private void displayCuisineMenu() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("0- Retour");
-        System.out.println("1- Afficher les commandes à faire en cuisine");
-    }
+    // private void displayCuisineMenu() {
+    //     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    //     System.out.println("0- Retour");
+    //     System.out.println("1- Afficher les commandes à faire en cuisine");
+    // }
 
-    private void displayBarMenu() {
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        System.out.println("0- Retour");
-        System.out.println("1- Afficher les commandes à faire au bar");
-    }
+    // private void displayBarMenu() {
+    //     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    //     System.out.println("0- Retour");
+    //     System.out.println("1- Afficher les commandes à faire au bar");
+    // }
 
     private void displayGestionPersonnelMenu() {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

@@ -2,18 +2,28 @@ import java.util.ArrayList;
 
 public class Commande {
 	
-	protected String nomClient;
 	protected int numeroDeCommande;
 	protected boolean pret = false;
+	protected boolean regle = false;
 	protected ArrayList<Plat> listeDesPlatsCommandes = new ArrayList<Plat>();
 	protected ArrayList<Boisson> listeDesBoissonsCommandees = new ArrayList<Boisson>();
 	protected double addition = 0;
 	
 	//Creation d'une commande
-	public Commande(String nomClient, int numeroDeCommande) {
-		this.nomClient = nomClient;
+	public Commande(int numeroDeCommande) {
 		this.numeroDeCommande = numeroDeCommande;
 	}
+	
+	public double getAddition() { return this.addition; }
+	public boolean isPret() { return this.pret; }
+	public boolean isRegle() { return this.regle; }
+	public ArrayList<Plat> getPlat() { return this.listeDesPlatsCommandes; }
+	public ArrayList<Boisson> getBoisson() { return this.listeDesBoissonsCommandees; }
+
+	public void setPret(boolean bool) { this.pret = bool;	}
+	public void setRegle(boolean bool) { this.regle = bool; }
+	
+
 	// Ajout d'un plat à la commande
 	public void ajoutPlatALaCommande(Plat newPlat) {
 		listeDesPlatsCommandes.add(newPlat);
@@ -22,25 +32,8 @@ public class Commande {
 	public void ajoutBoissonALaCommande(Boisson newBoisson) {
 		listeDesBoissonsCommandees.add(newBoisson);
 	}
-		
-
-	public String getNomClient() { return nomClient; }
-	public double getAddition() { return this.addition; }
-
-	public boolean isPret() {
-		return pret;
-	}
-	public void setPret(boolean bool) {
-		this.pret=bool;
-	}
-
-	public ArrayList<Plat> getPlat() {
-		return listeDesPlatsCommandes;
-	}
-
-	public ArrayList<Boisson> getBoisson() {
-		return listeDesBoissonsCommandees;
-	}
+	
+	
 	public ArrayList<Ingredients> getAllIngredientsFromPlat(){
 		ArrayList<Ingredients> retListOfIngredients = new ArrayList<Ingredients>();
 		for (int i = 0; i < listeDesPlatsCommandes.size(); i++) {
