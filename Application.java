@@ -14,7 +14,7 @@ public class Application {
     //
     // Variables
     //
-    protected ArrayList<Journee> listeDesJournée = new ArrayList<>();
+    protected ArrayList<Journee> listeDesJournee = new ArrayList<>();
     public int currentDay = 0;
     public Carte carteDuRestorant = new Carte();
     protected ArrayList<Personnel> listeDesEmployees = new ArrayList<Personnel>();
@@ -24,8 +24,8 @@ public class Application {
     //
     // Getters/Setters
     //
-    public ArrayList<Journee> getListeDesJournée() {
-        return this.listeDesJournée;
+    public ArrayList<Journee> getListeDesJournee() {
+        return this.listeDesJournee;
     }
 
     public int getCurrentDay() {
@@ -45,7 +45,7 @@ public class Application {
     }
 
     public void addAJournee(Journee newJournee) {
-        this.listeDesJournée.add(newJournee);
+        this.listeDesJournee.add(newJournee);
         for (int i = 1; i <= NOMBRE_TABLE; i++) {
             newJournee.listeDesTables.add(new Table(i, getRandomNumber(1, 5) * 2));
         }
@@ -160,7 +160,7 @@ public class Application {
             scanner.nextLine();
 
             // ASSIGNATION D'UNE TABLE
-            Journee journee = getListeDesJournée().get(getCurrentDay());
+            Journee journee = getListeDesJournee().get(getCurrentDay());
             numeroTable = journee.conduireATable(nbClients);
 
         }
@@ -221,7 +221,7 @@ public class Application {
             }
         }
         // Récupérer la journée actuelle
-        Journee journeeActuelle = listeDesJournée.get(currentDay);
+        Journee journeeActuelle = listeDesJournee.get(currentDay);
 
         // Récupérer la liste des tables de la journée actuelle
         ArrayList<Table> listeDesTables = journeeActuelle.listeDesTables;
@@ -236,7 +236,7 @@ public class Application {
         listeDesTables.set(numTable, tableAModifier);
 
         // Mettre à jour la journée dans la liste générale
-        listeDesJournée.set(currentDay, journeeActuelle);
+        listeDesJournee.set(currentDay, journeeActuelle);
         System.out.println("0- Pour continuer");
         scanner.nextInt();
         mainMenu(scanner);
@@ -279,7 +279,7 @@ public class Application {
             }
         }
         // Récupérer la journée actuelle
-        Journee journeeActuelle = listeDesJournée.get(currentDay);
+        Journee journeeActuelle = listeDesJournee.get(currentDay);
 
         // Récupérer la liste des tables de la journée actuelle
         ArrayList<Table> listeDesTables = journeeActuelle.listeDesTables;
@@ -294,7 +294,7 @@ public class Application {
         listeDesTables.set(numTable, tableAModifier);
 
         // Mettre à jour la journée dans la liste générale
-        listeDesJournée.set(currentDay, journeeActuelle);
+        listeDesJournee.set(currentDay, journeeActuelle);
 
         mainMenu(scanner);
     }
@@ -305,7 +305,7 @@ public class Application {
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 1:
-                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
+                ArrayList<Table> allTables = this.listeDesJournee.get(currentDay).listeDesTables;
                 int indexPrint = 0;
                 for (int i = 0; i < allTables.size(); i++) {
                     for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
@@ -329,7 +329,7 @@ public class Application {
                             if (choixCommandePrete == indexChoisi) {
                                 allTables.get(i).tableauDeCommandes.get(y).setPret(true);
                                 Commande commandeModifie = allTables.get(i).tableauDeCommandes.get(y);
-                                Journee journeeActuelle = listeDesJournée.get(currentDay);
+                                Journee journeeActuelle = listeDesJournee.get(currentDay);
 
                                 // Récupérer la liste des tables de la journée actuelle
                                 ArrayList<Table> listeDesTables = journeeActuelle.listeDesTables;
@@ -344,7 +344,7 @@ public class Application {
                                 listeDesTables.set(i, tableAModifier);
 
                                 // Mettre à jour la journée dans la liste générale
-                                listeDesJournée.set(currentDay, journeeActuelle);
+                                listeDesJournee.set(currentDay, journeeActuelle);
                                 ArrayList<Ingredients> retListOfIngredients = commandeModifie
                                         .getAllIngredientsFromPlat();
                                 stockGlbaleStock.removeStock(retListOfIngredients);
@@ -375,7 +375,7 @@ public class Application {
         int choixEcran = scanner.nextInt();
         switch (choixEcran) {
             case 1:
-                ArrayList<Table> allTables = this.listeDesJournée.get(currentDay).listeDesTables;
+                ArrayList<Table> allTables = this.listeDesJournee.get(currentDay).listeDesTables;
                 int indexPrint = 0;
                 for (int i = 0; i < allTables.size(); i++) {
                     for (int y = 0; y < allTables.get(i).tableauDeCommandes.size(); y++) {
@@ -399,7 +399,7 @@ public class Application {
                             if (choixCommandePrete == indexChoisi) {
                                 allTables.get(i).tableauDeCommandes.get(y).setPret(true);
                                 Commande commandeModifie = allTables.get(i).tableauDeCommandes.get(y);
-                                Journee journeeActuelle = listeDesJournée.get(currentDay);
+                                Journee journeeActuelle = listeDesJournee.get(currentDay);
 
                                 // Récupérer la liste des tables de la journée actuelle
                                 ArrayList<Table> listeDesTables = journeeActuelle.listeDesTables;
@@ -414,7 +414,7 @@ public class Application {
                                 listeDesTables.set(i, tableAModifier);
 
                                 // Mettre à jour la journée dans la liste générale
-                                listeDesJournée.set(currentDay, journeeActuelle);
+                                listeDesJournee.set(currentDay, journeeActuelle);
 
                             }
                             // System.out.println(indexPrint+"-
@@ -517,13 +517,13 @@ public class Application {
                                                                                                                   // serveur
                         for (int iTable = nbTableDejaDistribuee; iTable < dernierNumeroTableADistribuerACeServeur; iTable++) {
 
-                            Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
+                            Journee journee = getListeDesJournee().get(getCurrentDay()); // On récupère la journée
                             tableDuServeur.add(journee.getListeDesTables().get(iTable)); // On ajoute cette table a la
                                                                                          // liste
                             nbTableDejaDistribuee++;
                         }
                         if (resteDivisionEuclidienne > 0) {
-                            Journee journee = getListeDesJournée().get(getCurrentDay()); // On récupère la journée
+                            Journee journee = getListeDesJournee().get(getCurrentDay()); // On récupère la journée
                             tableDuServeur.add(journee.getListeDesTables().get(nbTableDejaDistribuee)); // On ajoute
                                                                                                         // cette table a
                                                                                                         // la liste
@@ -659,7 +659,7 @@ public class Application {
         System.out.println("Entrez le numéro de commande");
         int numCommande = scanner.nextInt();
         
-        Commande commandeDemandee = listeDesJournée.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
+        Commande commandeDemandee = listeDesJournee.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
         Addition additionAEditer = new Addition();
         additionAEditer.newAddition(commandeDemandee);
         additionAEditer.enregistrementFichier();
