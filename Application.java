@@ -61,6 +61,7 @@ public class Application {
     //
     public void startApp() {
         addAJournee(new Journee(H_OUVERTURE, H_FERMETURE));
+        creerDossierDuJour();
         try (Scanner scanner = new Scanner(System.in)) {
             mainMenu(scanner);
         }
