@@ -171,11 +171,22 @@ public class Addition {
 
 
     public void testEdition2(int numJour, int numTable) {
-        
+        //Sous Windows
+        File file = new File("bb\\");
+
+        if (file.exists()) {
+            System.out.println("Le dossier existe déjà : " + file.getAbsolutePath());
+        } else {
+            if (file.mkdir()) {
+                System.out.println("Ajout du dossier : " + file.getAbsolutePath());
+            } else {
+                System.out.println("Echec sur le dossier : " + file.getAbsolutePath());
+            }
+        }
 
 
         // String cheminDuFichier = "/Jour n" + numJour + "/Ticket Table n" + numTable;
-        String cheminDuFichier = "aa\\bb.txt";
+        String cheminDuFichier = "bb\\bb.txt";
         // Créez gn qbdet File pour le fichSgc
         File fichier = new File(cheminDuFichier);
         try {

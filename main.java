@@ -2,8 +2,8 @@
 public class main {
 	
 	public static void main(String[] args) {
-		Application Resto = new Application();
-		Resto.startApp();
+		//Application Resto = new Application();
+		//Resto.startApp();
 
 
 		//Addition hello = new Addition();
@@ -15,8 +15,8 @@ public class main {
 		// hello.affichageMenuStatsTickets();
 		// hello.editionFactureJournaliere();
 
-		//Addition hello = new Addition();
-		//hello.testEdition2(2,3);
+		Addition hello = new Addition();
+		hello.testEdition2(2,3);
 
 
 	}

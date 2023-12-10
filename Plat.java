@@ -6,7 +6,9 @@ public class Plat {
     protected String nom;
     protected double prix;
     protected Ingredients[] listeDIngredient ;
-    protected Plat(int id, String nom, double prix,Ingredients[] listeDIngredient){
+
+    
+    public Plat(int id, String nom, double prix,Ingredients[] listeDIngredient){
         this.id = id;
         this.nom = nom;
         this.prix = prix;
