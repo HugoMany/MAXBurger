@@ -631,8 +631,8 @@ public class Application {
         int numTable = scanner.nextInt();
         System.out.println("Entrez le numéro de commande");
         int numCommande = scanner.nextInt();
-        Commande commandeDemandee = listeDesJournée.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes
-                .get(numCommande);
+        
+        Commande commandeDemandee = listeDesJournée.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
         Addition additionAEditer = new Addition();
         additionAEditer.newAddition(commandeDemandee);
         additionAEditer.enregistrementFichier();
