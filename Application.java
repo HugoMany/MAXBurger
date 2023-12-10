@@ -668,9 +668,12 @@ public class Application {
         // Elles sont ici initialisées manuellement
         // int numTable = 1;
         // int numCommande = 1;
+        
         System.out.println("Entrez le numéro de table");
         int numTable = scanner.nextInt();
-        // On récupère la liste des journées, on regarde le jour actuel, on récupère la liste des tables du jour et on selectionne celle qui nous interesse, enfin on prend la derniere commande sur cette table.
+
+        // On récupère la liste des journées, on regarde le jour actuel, on récupère la liste des tables du jour et on selectionne celle qui nous interesse
+        // enfin on prend la derniere commande sur cette table.
         int numCommande = getListeDesJournee().get(getCurrentDay()).getListeDesTables().get(numTable).getNombreDeCommandesTable();;
         
         Commande commandeDemandee = listeDesJournee.get(currentDay).listeDesTables.get(numTable).tableauDeCommandes.get(numCommande);
