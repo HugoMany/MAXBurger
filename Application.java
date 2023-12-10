@@ -100,7 +100,7 @@ public class Application {
                 addition(scanner);
                 break;
             default:
-                startApp();
+                mainMenu(scanner);
                 break;
         }
 
@@ -118,7 +118,7 @@ public class Application {
                     demandeNomEtNumeroTable(1, scanner);
                     break;
                 default:
-                    startApp();
+                    mainMenu(scanner);
                     break;
             }
         }
@@ -363,7 +363,7 @@ public class Application {
                 mainMenu(scanner);
                 break;
             default:
-                startApp();
+                mainMenu(scanner);
                 break;
         }
 
@@ -429,7 +429,7 @@ public class Application {
                 mainMenu(scanner);
                 break;
             default:
-                startApp();
+                mainMenu(scanner);
                 break;
 
         }
@@ -559,7 +559,7 @@ public class Application {
                 break;
 
             default:
-                startApp();
+                mainMenu(scanner);
                 break;
         }
     }
