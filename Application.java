@@ -94,10 +94,10 @@ public class Application {
                 affichageStock(scanner);
                 break;
             case 7:
-                nextDay(scanner);
+                addition(scanner);
                 break;
             case 8:
-                addition(scanner);
+                nextDay(scanner);
                 break;
             default:
                 mainMenu(scanner);
@@ -645,7 +645,7 @@ public class Application {
         System.out.println("Journée suivante!");
         System.out.println("\n0- Pour continuer");
         scanner.nextInt();
-
+        mainMenu(scanner);
     }
 
     public void addition(Scanner scanner) {
@@ -685,8 +685,8 @@ public class Application {
         System.out.println("4- Ecran monitoring");
         System.out.println("5- Ecran gestion personnel");
         System.out.println("6- Afficher stock");
-        System.out.println("7- Prochaine journée");
-        System.out.println("8- Demande d'addition");
+        System.out.println("7- Demande d'addition");
+        System.out.println("8- Prochaine journée");
         System.out.println("0- Exit");
     }
 
