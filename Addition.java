@@ -43,13 +43,13 @@ public class Addition {
 
     // On récupère tous les éléments commandés pour ensuite pouvoir calculer le montant à payer
     void calculAddition() {
-        if (listeDesPlats == null) {}
+        if (listeDesPlats == null || listeDesPlats.size() == 0) {}
         else {
             for (int i = 0; i < listeDesPlats.size(); i++) {
                 somme += listeDesPlats.get(i).getPrix();
             }
         }
-        if (listeDesBoissons == null) {}
+        if (listeDesBoissons == null || listeDesBoissons.size() == 0) {}
         else {
             for (int i = 0; i < listeDesBoissons.size(); i++) {
                 somme += listeDesBoissons.get(i).getPrix();
@@ -70,7 +70,7 @@ public class Addition {
     // On prépare une liste textuelle des plats
     public String listeDesPlatsTicket() {
         String liste = "";
-        if (this.listeDesPlats == null) { return "Aucun plat\n";}
+        if (this.listeDesPlats == null || listeDesPlats.size() == 0) { return "Aucun plat\n";}
         else {
             for (int i = 0; i < listeDesPlats.size(); i++) {
                 liste += listeDesPlats.get(i).getNom() + "- \t" + listeDesPlats.get(i).getPrix() + " e\n";
@@ -82,7 +82,7 @@ public class Addition {
     // On prépare une liste textuelle des boissons
     public String listeDesBoissonsTicket() {
         String liste = "";
-        if (this.listeDesBoissons == null) { return "Aucune boisson\n";}
+        if (this.listeDesBoissons == null || listeDesBoissons.size() == 0) { return "Aucune boisson\n";}
         else {
             for (int i = 0; i < listeDesBoissons.size(); i++) {
                 liste += listeDesBoissons.get(i).getNom() + "- \t" + listeDesBoissons.get(i).getPrix() + " e\n";
